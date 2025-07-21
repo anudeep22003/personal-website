@@ -1,0 +1,6 @@
+name = "my-worker"
+type = "javascript"
+compatibility_date = "2025-07-21"
+
+[site]
+bucket = "./frontend/dist"
