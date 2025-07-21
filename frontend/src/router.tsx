@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import Homepage from "./pages/Homepage";
 import RootLayout from "./Layout";
+import ResumePage from "./pages/Resume";
 
 const routes = [
   {
@@ -9,6 +10,10 @@ const routes = [
       {
         path: "/",
         element: <Homepage />,
+      },
+      {
+        path: "/resume",
+        element: <ResumePage />,
       },
     ],
   },

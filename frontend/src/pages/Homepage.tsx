@@ -56,7 +56,7 @@ const Homepage: React.FC = () => {
         </nav>
       </div>
       <section className="mt-8 text-base text-neutral-800 leading-relaxed">
-        <span className="text-neutral-500 text-sm mb-2 block">
+        <span className="inline-block bg-black text-white text-sm mb-2 block p-1 rounded-sm">
           current stage
         </span>
         <p>
