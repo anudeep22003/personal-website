@@ -6,13 +6,14 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
 
-    # shadcn installation instructions
     "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
       ]
-    }   "skipLibCheck": true,
+    },   
+    
+    "skipLibCheck": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
