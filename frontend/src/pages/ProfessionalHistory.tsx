@@ -122,9 +122,7 @@ const ProfessionalHistory = () => {
               <p className="text-neutral-600 leading-relaxed max-w-2xl text-sm md:text-base">
                 A timeline of experiences that shaped my path through
                 technology, entrepreneurship, and product development.
-                Each chapter represents not just professional growth,
-                but the evolution of ideas and the connections between
-                them.
+                Each experience helped me grow.
               </p>
             </div>
 
@@ -136,15 +134,15 @@ const ProfessionalHistory = () => {
                 period="Jun 2024 – May 2025"
                 location="San Francisco, CA"
                 tldr="Built AI recruiting platform with multi-agent architecture. Processed 500+ resumes in <20s, conducted 1,000+ voice interviews with fraud prevention. Full-stack TypeScript/Python, real-time WebSocket systems, neural matching engine. Strategic exit after market validation."
-                narrative={`At Reqpal, I architected an AI-driven recruiting platform that reimagined how companies could build custom recruiters. The vision was ambitious: enable organizations to configure their own hiring agents with custom prompts, rubrics, and decision rules that could evolve through real-time conversation trees.
+                narrative={`I built an AI recruiting platform where companies could configure custom hiring agents with prompts, rubrics, and decision rules that evolved through conversation trees.
 
-The technical foundation rested on an event-driven multi-agent architecture, with WebSocket-based interview systems enabling seamless real-time interactions. I built a neural matching engine that could process and rank over 500 resumes in under 20 seconds using structured extraction and multi-parameter scoring—a critical breakthrough for scalable talent assessment.
+The platform used an event-driven multi-agent architecture with WebSocket-based interviews. The neural matching engine processed and ranked 500+ resumes in under 20 seconds using structured extraction and multi-parameter scoring.
 
-Perhaps most innovative was our voice-first interview experience, complete with screen sharing, webcam integration, and sophisticated fraud prevention through separated video storage per question-answer pair. We successfully conducted over 1,000 distributed interviews, validating the platform's real-world utility.
+The voice interview system included screen sharing, webcam integration, and fraud prevention through separated video storage per question-answer pair. We conducted over 1,000 distributed interviews across the platform.
 
-The backend featured an asynchronous processing pipeline built with SQLAlchemy ORM, designed for high-throughput resume analysis. A real-time admin dashboard provided event timeline visualization, giving recruiters unprecedented insight into their hiring processes.
+The backend ran asynchronous processing pipelines with SQLAlchemy ORM for high-throughput resume analysis. The admin dashboard provided real-time event timeline visualization for recruiters.
 
-After six months of intense development and market validation, we made the strategic decision to exit due to challenging market conditions, transitioning the platform to auto-pilot mode with an external sales partnership.`}
+After six months of development and market validation, we transitioned to auto-pilot mode with an external sales partnership due to market conditions.`}
                 stack="TypeScript (React); Python (FastAPI, Pydantic); Unix, OpenAI, Gemini, PostgreSQL"
               />
 
@@ -155,15 +153,15 @@ After six months of intense development and market validation, we made the strat
                 period="Apr 2023 – May 2024"
                 location="Remote"
                 tldr="Built text-to-animation platform pre-Sora. Natural language → Unity code transpilation, Stable Diffusion + LoRA fine-tuning, web-deployed Unity engine. Full AI pipeline: script parsing, character generation, voice synthesis, video processing. Pub-sub architecture, RunPod/Modal orchestration."
-                narrative={`Rifflix emerged from a fascinating technical challenge: solving video generation controllability in the early diffusion model era. While everyone was chasing generative video, we took a different path—building a text-to-animation platform using Unity's game engine.
+                narrative={`We built a text-to-animation platform using Unity's game engine to solve video generation controllability before Sora existed.
 
-I architected a natural language transpilation engine that felt almost magical in use. Through context-free grammar and function calling, we could extract entities from user scripts and convert plain English into Unity code that controlled character movement, camera angles, and lighting. Users could write "The character walks to the door and turns on the light" and watch it happen.
+I architected a natural language transpilation engine using context-free grammar and function calling. Users could write "The character walks to the door and turns on the light" and watch Unity code execute those actions in real-time.
 
-The full-stack infrastructure was comprehensive: authentication systems, database management, credit systems, and most remarkably, deploying Unity engine with interactive capabilities directly on the web. This required deep integration work that bridged game development with web technologies.
+The infrastructure included authentication, database management, credit systems, and deploying Unity engine with interactive capabilities on the web. This required bridging game development with web technologies.
 
-Our AI pipeline generated characters and backgrounds using Stable Diffusion with custom LoRA fine-tuning, deployed on private RunPod infrastructure with Modal orchestrating the workloads. The audio-video pipeline was equally sophisticated, integrating ElevenLabs for dialogue generation, WebRTC for screen recording, and FFmpeg for post-processing optimized for social media.
+Our AI pipeline generated characters and backgrounds using Stable Diffusion with custom LoRA fine-tuning on RunPod infrastructure, orchestrated through Modal. The audio-video pipeline integrated ElevenLabs for dialogue, WebRTC for screen recording, and FFmpeg for social media optimization.
 
-The architecture's elegance lay in its publisher-subscriber queue system, enabling non-blocking video processing. Users could generate complete animated stories with synchronized audio, record them, and download polished content—all from a simple text description.`}
+The publisher-subscriber queue system enabled non-blocking video processing. Users generated complete animated stories with synchronized audio from text descriptions.`}
                 stack="TypeScript (React); Python (FastAPI, Pydantic); MongoDB, Unix, ffmpeg, Docker, GCP"
               />
 
@@ -174,17 +172,15 @@ The architecture's elegance lay in its publisher-subscriber queue system, enabli
                 period="Jan 2021 – Dec 2022"
                 location="San Francisco, CA → Bengaluru, India"
                 tldr="Built full RAG system 2 years before ChatGPT. Embedding-based semantic search, knowledge graphs with Neo4j, automated metadata extraction (TF-IDF, NLP). Shipped Chrome extension + iOS app. Self-taught Python/spaCy/NLP in 3 months, immediately deployed to production."
-                narrative={`Sidebrain was born from a prescient thesis: that knowledge retrieval and exploration would fundamentally shift to conversation-driven interactions. This was 2021, well before ChatGPT made conversational AI mainstream, yet we were building what would later be recognized as a complete RAG (Retrieval-Augmented Generation) system.
+                narrative={`I built a conversation-driven knowledge retrieval system two years before ChatGPT launched. The platform implemented embedding-based semantic search with cosine similarity, document chunking, and context-aware response generation.
 
-I architected the entire system from scratch, implementing embedding-based semantic search with cosine similarity, intelligent document chunking, and context-aware response generation. The technical foundation required deep understanding of how human knowledge could be computationally indexed and retrieved through natural conversation.
+The metadata extraction pipeline automated document tagging using TF-IDF, lemmatization, and stemming algorithms. Rule-based semantic merging maintained data integrity while understanding document relationships automatically.
 
-Our metadata extraction pipeline eliminated the tedious manual tagging that plagued knowledge management systems. Using TF-IDF, lemmatization, and stemming algorithms, we could automatically understand document relationships while maintaining data integrity through rule-based semantic merging.
+The knowledge graph component used NLP techniques like tokenization and dependency parsing with Neo4j to extract semantic triples and map concept relationships. This created an interconnected knowledge web that improved with each interaction.
 
-The knowledge graph component was particularly innovative, employing NLP techniques like tokenization and dependency parsing with Neo4j to extract semantic triples and map complex relationships between concepts. This created a living, interconnected web of knowledge that grew more intelligent with each interaction.
+We shipped Chrome extension and iOS apps with voice and text interfaces. Users could capture context-rich information and retrieve it through natural conversation while the system preserved structured metadata.
 
-We shipped both a Chrome extension and iOS app with voice and text interfaces, enabling users to capture context-rich information and retrieve it naturally. The system preserved structured metadata while feeling effortlessly conversational.
-
-This journey required intense self-teaching—I absorbed Python, spaCy, and NLP fundamentals through a concentrated three-month immersion, then immediately applied this knowledge to production systems serving real users.`}
+I learned Python, spaCy, and NLP fundamentals in three months, then immediately deployed these systems to production serving real users.`}
                 stack="Python, spaCy, Neo4j, NLP, TF-IDF, iOS, Chrome Extensions"
               />
 
@@ -195,15 +191,15 @@ This journey required intense self-teaching—I absorbed Python, spaCy, and NLP 
                 period="2019 – 2021"
                 location="San Francisco, CA"
                 tldr="Series D fintech ($580M funding), unbanked lending platform. Built OCR + human-in-loop document verification, fraud detection systems. Retained through 80% layoffs. Led CARES Act SMB emergency funding infrastructure. Consumer credit platform with personalized offers."
-                narrative={`At Aura, a Series D fintech with $580M in funding, I led consumer products and backend systems focused on providing credit access to unbanked populations—a mission that combined technical innovation with social impact.
+                narrative={`At this Series D fintech with $580M funding, I led consumer products and backend systems providing credit access to unbanked populations.
 
-Before AI-powered document processing became standard, I built and deployed OCR systems combined with human-in-the-loop workflows for document verification. Working closely with operations teams, we automated data labeling, parsing, and fraud detection, dramatically reducing processing times while improving conversion rates.
+I built OCR systems with human-in-the-loop workflows for document verification before AI document processing became standard. Working with operations teams, we automated data labeling, parsing, and fraud detection, reducing processing times while improving conversion rates.
 
-My product vision extended beyond single-use lending to create a comprehensive consumer platform. I launched credit score updates, personalized offers, and rewards systems designed to drive sustained user engagement and financial empowerment.
+I launched credit score updates, personalized offers, and rewards systems to create a comprehensive consumer platform beyond single-use lending.
 
-During the company's most challenging period, I was retained as core technical staff through 80% layoffs—a testament to the critical nature of the systems I'd built. In this role, I led the CARES Act project, rapidly developing infrastructure to deliver emergency funds to thin-file small and medium businesses during the early months of the pandemic.
+During 80% layoffs, I was retained as core technical staff and led the CARES Act project, rapidly building infrastructure to deliver emergency funds to thin-file small and medium businesses during early pandemic months.
 
-This experience taught me how product leadership in fintech requires balancing regulatory compliance, fraud prevention, and user experience while serving populations that traditional financial services often overlook.`}
+The role required balancing regulatory compliance, fraud prevention, and user experience while serving populations traditional financial services overlook.`}
               />
 
               <ExperienceCard
@@ -213,15 +209,15 @@ This experience taught me how product leadership in fintech requires balancing r
                 period="2017 – 2019"
                 location="San Francisco, CA"
                 tldr="Insurtech acquired by Credit Karma ($88M raised). Behavior-based auto insurance pricing using 150B+ miles driving data. ML collision detection, real-time risk assessment, sensor data analytics. iOS/Android apps for seamless data collection. Pre-telematics mainstream adoption."
-                narrative={`Zendrive, later acquired by CreditKarma after raising $88M, was pioneering insurtech focused on behavior-based insurance pricing—a concept that seems obvious now but was revolutionary then.
+                narrative={`Zendrive was building behavior-based insurance pricing before telematics became mainstream. After raising $88M, CreditKarma acquired the company.
 
-I led the consumer experience for an auto insurance platform that priced policies based on actual driver behavior rather than demographic proxies. This required building iOS and Android applications that could seamlessly collect and analyze driving patterns while maintaining user trust and engagement.
+I led consumer experience for an auto insurance platform that priced policies based on actual driver behavior rather than demographics. This required building iOS and Android apps that collected and analyzed driving patterns while maintaining user trust.
 
-The technical challenges were immense. We developed an insurance backend that integrated sensor data, behavioral analytics, and crime statistics to enable dynamic pricing. This real-time risk assessment represented a fundamental shift from traditional actuarial models to predictive, personalized insurance.
+We developed an insurance backend integrating sensor data, behavioral analytics, and crime statistics for dynamic pricing. This shifted from traditional actuarial models to predictive, personalized insurance.
 
-Our collision detection system was trained on over 150 billion miles of driving data—a dataset that few companies could match even today. The machine learning models could identify potential accidents with remarkable accuracy, enabling proactive interventions and more precise risk assessment.
+Our collision detection system trained on over 150 billion miles of driving data. The ML models identified potential accidents with high accuracy, enabling proactive interventions and precise risk assessment.
 
-This experience showed me how data-driven products could transform entire industries by challenging fundamental assumptions about risk, pricing, and user behavior.`}
+This showed me how data-driven products could transform industries by challenging fundamental assumptions about risk, pricing, and user behavior.`}
               />
 
               <ExperienceCard
@@ -231,15 +227,13 @@ This experience showed me how data-driven products could transform entire indust
                 period="2011 – 2017"
                 location="New Haven, CT & India"
                 tldr="Yale MBA (tech/entrepreneurship focus), Apple intern (SSO, App Store redesign). Built healthtech for malaria adherence in Sierra Leone. CS foundation: algorithms, data structures, C++. Early product experience reaching billions of users."
-                narrative={`My educational journey laid the technical and philosophical foundation for everything that followed.
+                narrative={`At Yale's MBA program, I focused on technology, entrepreneurship, and philosophy. I interned at Apple, contributing to Apple Single Sign-On launch and iOS App Store redesign.
 
-At Yale's MBA program, I focused on the intersection of technology, entrepreneurship, and philosophy—a combination that shaped my approach to building products that matter. During this time, I interned at Apple, contributing to the launch of Apple Single Sign-On and the iOS App Store redesign, experiencing firsthand how thoughtful design and technical excellence could reach billions of users.
+I built and launched a healthtech product in Sierra Leone for malaria drug adherence. The system converted text messages from basic feature phones at diagnosis into structured medication plans—parsing JSON to save lives.
 
-An experience that particularly shaped my worldview was building and launching a healthtech product in Sierra Leone to improve malaria drug adherence rates. This project required converting text messages sent from basic feature phones at point of diagnosis into structured medication plans—essentially parsing JSON before it was trendy, but more importantly, using technology to directly save lives.
+My undergraduate years at Birla Institute provided computational foundations: data structures, algorithms, C++, and assembly language. These became tools for architecting complex systems and thinking systematically about problems.
 
-My undergraduate years at Birla Institute of Technology provided the computational foundation: data structures, algorithms, C++, and assembly language. These weren't just academic concepts but tools that would later enable me to architect complex systems and think systematically about computational problems.
-
-This educational foundation taught me that technology's true power lies not in its sophistication, but in its ability to solve meaningful human problems at scale.`}
+This foundation taught me that technology's power lies in solving meaningful human problems at scale.`}
                 isLast
               />
             </div>
