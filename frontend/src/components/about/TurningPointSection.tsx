@@ -8,19 +8,12 @@ export const TurningPointSection: React.FC = () => {
         <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
           2021
         </span>
-        The turning point. Pandemic hit, was deep in educating
-        myself on biology when GPT-3 launched, and I saw
-        transformer architecture mirroring Wernicke's and Broca's
-        areas in the brain.{" "}
-        <span className="underline decoration-green-600 decoration-3 underline-offset-4">
-          Lightning strike of clarity
-        </span>
-        . I exited the company, abandoned all immediate plans to
-        stay in SF, and flew back to India.
+        Pandemic hit. While deep in biology, GPT-3 dropped—a lightning
+        bolt. Saw AI echoing the brain. Quit, left SF, flew to India.
+        Reset everything.
       </p>
       <p className="text-center italic text-neutral-600 my-8 text-lg">
-        Spent the next four years becoming the person I needed to
-        be
+        Four years becoming the person I needed to be.
       </p>
     </ContentSection>
   );

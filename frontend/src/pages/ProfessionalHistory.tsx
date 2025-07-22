@@ -1,28 +1,32 @@
-import React from 'react';
-import { TableOfContents } from '@/components/TableOfContents';
-import { ContentSection } from '@/components/ContentSection';
-import { useScrollSpy } from '@/hooks/useScrollSpy';
-import type { TocItem } from '@/types';
+import { TableOfContents } from "@/components/TableOfContents";
+import { ContentSection } from "@/components/ContentSection";
+import { useScrollSpy } from "@/hooks/useScrollSpy";
+import type { TocItem } from "@/types";
 
 const ProfessionalHistory = () => {
   const { activeSection, scrollToSection } = useScrollSpy();
 
   const tocItems: TocItem[] = [
-    { id: 'reqpal', label: 'Reqpal (2024-2025)' },
-    { id: 'rifflix', label: 'Rifflix (2023-2024)' },
-    { id: 'sidebrain', label: 'Sidebrain (2021-2022)' },
-    { id: 'aura', label: 'Aura (2019-2021)' },
-    { id: 'zendrive', label: 'Zendrive (2017-2019)' },
-    { id: 'education', label: 'Education' },
+    { id: "reqpal", label: "Reqpal (2024-2025)" },
+    { id: "rifflix", label: "Rifflix (2023-2024)" },
+    { id: "sidebrain", label: "Sidebrain (2021-2022)" },
+    { id: "aura", label: "Aura (2019-2021)" },
+    { id: "zendrive", label: "Zendrive (2017-2019)" },
+    { id: "education", label: "Education" },
   ];
 
-  const TimelineConnector = ({ isLast = false }: { isLast?: boolean }) => (
-    <div className="absolute left-4 md:left-8 top-16 w-px bg-gradient-to-b from-neutral-300 via-neutral-200 to-transparent" 
-         style={{ 
-           height: isLast ? '0' : '120px',
-           transform: 'translateX(-0.5px)',
-           opacity: isLast ? 0 : 0.6 
-         }} 
+  const TimelineConnector = ({
+    isLast = false,
+  }: {
+    isLast?: boolean;
+  }) => (
+    <div
+      className="absolute left-4 md:left-8 top-16 w-px bg-gradient-to-b from-neutral-300 via-neutral-200 to-transparent"
+      style={{
+        height: isLast ? "0" : "120px",
+        transform: "translateX(-0.5px)",
+        opacity: isLast ? 0 : 0.6,
+      }}
     />
   );
 
@@ -30,23 +34,23 @@ const ProfessionalHistory = () => {
     <div className="absolute left-2 md:left-6 top-8 w-4 h-4 bg-white border-2 border-neutral-400 rounded-full shadow-sm" />
   );
 
-  const ExperienceCard = ({ 
-    id, 
-    company, 
-    role, 
-    period, 
-    location, 
-    narrative, 
+  const ExperienceCard = ({
+    id,
+    company,
+    role,
+    period,
+    location,
+    narrative,
     stack,
     tldr,
-    isLast = false 
-  }: { 
-    id: string; 
-    company: string; 
-    role: string; 
-    period: string; 
-    location: string; 
-    narrative: string; 
+    isLast = false,
+  }: {
+    id: string;
+    company: string;
+    role: string;
+    period: string;
+    location: string;
+    narrative: string;
     stack?: string;
     tldr?: string;
     isLast?: boolean;
@@ -54,38 +58,50 @@ const ProfessionalHistory = () => {
     <div className="relative mb-12 md:mb-16">
       <TimelineNode />
       <TimelineConnector isLast={isLast} />
-      
+
       <ContentSection
         id={id}
         title=""
         className="ml-8 md:ml-20 bg-white border border-neutral-200 rounded-lg p-4 md:p-6 shadow-sm hover:shadow-md transition-shadow duration-200"
       >
         <div className="mb-4">
-          <h3 className="text-lg md:text-xl font-semibold text-neutral-900 mb-1">{company}</h3>
-          <p className="text-neutral-600 text-xs md:text-sm mb-1">{role}</p>
+          <h3 className="text-lg md:text-xl font-semibold text-neutral-900 mb-1">
+            {company}
+          </h3>
+          <p className="text-neutral-600 text-xs md:text-sm mb-1">
+            {role}
+          </p>
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-xs text-neutral-500">
             <span>{period}</span>
             <span className="mt-1 sm:mt-0">{location}</span>
           </div>
         </div>
-        
+
         {tldr && (
           <div className="mb-4 md:mb-6 p-3 md:p-4 bg-gradient-to-r from-green-50 to-neutral-50 border-l-4 border-green-500 rounded-r-lg">
             <div className="flex items-center mb-2">
               <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-              <span className="text-xs font-semibold text-green-700 uppercase tracking-wide">TL;DR</span>
+              <span className="text-xs font-semibold text-green-700 uppercase tracking-wide">
+                TL;DR
+              </span>
             </div>
-            <p className="text-xs md:text-sm font-medium text-neutral-800 leading-relaxed">{tldr}</p>
+            <p className="text-xs md:text-sm font-medium text-neutral-800 leading-relaxed">
+              {tldr}
+            </p>
           </div>
         )}
-        
+
         <div className="prose prose-neutral max-w-none">
-          <p className="text-xs md:text-sm text-neutral-700 leading-relaxed whitespace-pre-line">{narrative}</p>
+          <p className="text-xs md:text-sm text-neutral-700 leading-relaxed whitespace-pre-line">
+            {narrative}
+          </p>
         </div>
-        
+
         {stack && (
           <div className="mt-4 pt-4 border-t border-neutral-100">
-            <p className="text-xs text-neutral-500 font-medium mb-1">Technology Stack</p>
+            <p className="text-xs text-neutral-500 font-medium mb-1">
+              Technology Stack
+            </p>
             <p className="text-xs text-neutral-600">{stack}</p>
           </div>
         )}
@@ -100,10 +116,15 @@ const ProfessionalHistory = () => {
           {/* Main Timeline Content */}
           <main className="flex-1">
             <div className="mb-8 md:mb-12">
-              <h1 className="text-2xl md:text-3xl font-bold text-neutral-900 mb-4">Professional Journey</h1>
+              <h1 className="text-2xl md:text-3xl font-bold text-neutral-900 mb-4">
+                Professional Journey
+              </h1>
               <p className="text-neutral-600 leading-relaxed max-w-2xl text-sm md:text-base">
-                A timeline of experiences that shaped my path through technology, entrepreneurship, and product development. 
-                Each chapter represents not just professional growth, but the evolution of ideas and the connections between them.
+                A timeline of experiences that shaped my path through
+                technology, entrepreneurship, and product development.
+                Each chapter represents not just professional growth,
+                but the evolution of ideas and the connections between
+                them.
               </p>
             </div>
 

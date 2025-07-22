@@ -8,11 +8,10 @@ export const SFJourneySection: React.FC = () => {
         <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
           2017
         </span>
-        Moved to SF with no job, slept on couches for 9 months.
-        Everyone said "beggars can't be choosers," but I held out
-        for what I wanted. Got it. Worked directly with founders
-        and realized they're just human. Anyone can build
-        something.
+        Landed in SF with no job, crashed on couches for 9 months.
+        Ignored the "beggars can't be choosers" advice, held out for the
+        right role. Got it. Learned founders are just people. Anyone can
+        build something.
       </p>
     </ContentSection>
   );
