@@ -3,8 +3,9 @@ import Homepage from "./pages/Homepage";
 import RootLayout from "./Layout";
 import ResumePage from "./pages/Resume";
 import AboutPage from "./pages/About";
+import ProfessionalHistory from "./pages/ProfessionalHistory";
 
-const routes = [
+export const routes = [
   {
     element: <RootLayout />,
     children: [
@@ -19,6 +20,10 @@ const routes = [
       {
         path: "/about",
         element: <AboutPage />,
+      },
+      {
+        path: "/professional-history",
+        element: <ProfessionalHistory />,
       },
     ],
   },
