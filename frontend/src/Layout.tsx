@@ -24,7 +24,7 @@ const RootLayout = () => {
             <li key={link.label}>
               <Link
                 to={link.href}
-                className="text-base lowercase tracking-wide text-neutral-700 hover:text-black transition-colors px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-black/10"
+                className="text-base lowercase tracking-wide text-neutral-700 hover:text-green-600 transition-colors px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-green-600/20"
               >
                 {link.label}
               </Link>

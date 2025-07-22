@@ -39,6 +39,16 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-green-50: var(--green-50);
+  --color-green-100: var(--green-100);
+  --color-green-200: var(--green-200);
+  --color-green-300: var(--green-300);
+  --color-green-400: var(--green-400);
+  --color-green-500: var(--green-500);
+  --color-green-600: var(--green-600);
+  --color-green-700: var(--green-700);
+  --color-green-800: var(--green-800);
+  --color-green-900: var(--green-900);
 }
 
 :root {
@@ -74,6 +84,16 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+  --green-50: oklch(0.98 0.02 160);
+  --green-100: oklch(0.95 0.04 160);
+  --green-200: oklch(0.90 0.08 160);
+  --green-300: oklch(0.80 0.15 160);
+  --green-400: oklch(0.70 0.20 160);
+  --green-500: oklch(0.60 0.25 160);
+  --green-600: oklch(0.50 0.23 160);
+  --green-700: oklch(0.40 0.20 160);
+  --green-800: oklch(0.30 0.15 160);
+  --green-900: oklch(0.20 0.10 160);
 }
 
 .dark {
