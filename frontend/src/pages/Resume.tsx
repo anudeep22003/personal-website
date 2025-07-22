@@ -17,6 +17,13 @@ const ResumePage: React.FC = () => {
           download or view my resume
         </p>
       </header> */}
+      <div className="my-4">
+        <a href="/resume.pdf" download>
+          <Button variant="outline" size="lg" asChild>
+            <span>download pdf</span>
+          </Button>
+        </a>
+      </div>
       <div className="w-full flex flex-col items-center max-w-2xl mx-auto px-2">
         <iframe
           src="/resume.pdf"
@@ -24,13 +31,6 @@ const ResumePage: React.FC = () => {
           className="w-full min-h-[60vh] h-[80vh] max-h-[calc(100vh-200px)] border border-neutral-200 rounded bg-white"
           style={{ minHeight: 0 }}
         />
-        <div className="my-4">
-          <a href="/resume.pdf" download>
-            <Button variant="outline" size="lg" asChild>
-              <span>download pdf</span>
-            </Button>
-          </a>
-        </div>
       </div>
     </section>
   );

@@ -19,38 +19,65 @@ const Homepage: React.FC = () => {
       {/* Enhanced elegant background treatment */}
       <div className="absolute inset-0 bg-gradient-to-br from-neutral-50 via-white to-neutral-100 -z-10 rounded-lg opacity-70" />
       <div className="relative border border-neutral-200/60 rounded-lg p-6 bg-white/85 backdrop-blur-sm shadow-sm ring-1 ring-neutral-100/80">
-        <header className="flex flex-col gap-3 mt-4 mb-6">
-          <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-normal lowercase tracking-tight">
-              anudeep yegireddi
-            </h1>
-            <div className="h-2 w-2 bg-neutral-400 rounded-full animate-pulse" />
+        <header className="flex flex-col md:flex-row gap-6 md:gap-8 mt-4 mb-6 items-center md:items-start">
+          {/* Profile picture */}
+          <img
+            src="/anudeep.jpeg"
+            alt="Anudeep Yegireddi"
+            className="w-48 h-48 md:w-64 md:h-64 rounded-full border-2 border-neutral-200 shadow-sm object-cover"
+          />
+          {/* Name and info */}
+          <div className="flex flex-col gap-3 flex-1 items-start text-left">
+            <div className="flex items-center gap-3">
+              <h1 className="text-2xl font-normal lowercase tracking-tight">
+                anudeep yegireddi
+              </h1>
+              <div className="h-2 w-2 bg-neutral-400 rounded-full animate-pulse" />
+            </div>
+            <p className="text-base text-neutral-600 lowercase italic">
+              engineer, founder, late bloomer
+            </p>
+            {/* now */}
+            <div className="flex flex-wrap items-center gap-2 text-sm">
+              <span className="inline-block bg-black text-white px-3 py-1.5 rounded-full text-xs font-medium">
+                now
+              </span>
+              {[
+                "multi-agent systems",
+                "semantic interfaces",
+                "ai that learns",
+                "memory palaces",
+              ].map((item) => (
+                <span
+                  key={item}
+                  className="text-neutral-600 text-xs font-medium underline underline-offset-2"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+            {/* before */}
+            <div className="flex flex-wrap items-center gap-2 text-sm">
+              <span className="inline-block bg-neutral-100 text-neutral-600 px-2 py-1 rounded-full text-xs font-medium border border-neutral-300">
+                before
+              </span>
+              {[
+                "yale",
+                "apple",
+                "computer science",
+                "product management",
+                "two exits",
+              ].map((item) => (
+                <span
+                  key={item}
+                  className="text-neutral-600 text-xs font-medium underline underline-offset-2"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
-          <p className="text-base text-neutral-600 lowercase italic">
-            engineer, founder, late bloomer
-          </p>
         </header>
-
-        {/* now */}
-        <div className="flex flex-wrap items-center gap-2 mb-4 text-sm">
-          <span className="inline-block bg-black text-white px-3 py-1.5 rounded-full text-xs font-medium">
-            now
-          </span>
-          <span className="text-neutral-600">
-            multi-agent systems • semantic interfaces • ai that learns
-          </span>
-        </div>
-
-        {/* before */}
-        <div className="flex flex-wrap items-center gap-2 mb-6 text-sm">
-          <span className="inline-block bg-neutral-100 text-neutral-600 px-2 py-1 rounded-full text-xs font-medium border border-neutral-300">
-            before
-          </span>
-          <span className="text-neutral-600">
-            yale • apple • computer science • product management • two
-            exits
-          </span>
-        </div>
 
         <div className="text-base leading-relaxed text-neutral-600 space-y-6">
           {/* Who am I */}
