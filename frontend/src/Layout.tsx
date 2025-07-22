@@ -10,10 +10,6 @@ const links = [
     href: "/about",
   },
   {
-    label: "contact",
-    href: "/contact",
-  },
-  {
     label: "resume",
     href: "/resume",
   },
