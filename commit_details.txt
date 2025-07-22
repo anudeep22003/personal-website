@@ -1,0 +1,1815 @@
+### DIFF ###
+ commit_details.txt                                 | 170 +++++++++
+ frontend/.claude/task2.md                          |  15 +
+ frontend/ai-docs/available-to-use.md               |  51 +++
+ frontend/src/components/ContentSection.tsx         |  18 +
+ frontend/src/components/TableOfContents.tsx        |  35 ++
+ frontend/src/components/about/BuildingSection.tsx  |  39 +++
+ frontend/src/components/about/ContactLinks.tsx     |  27 ++
+ frontend/src/components/about/CurrentSection.tsx   |  22 ++
+ frontend/src/components/about/EarlyDaysSection.tsx |  33 ++
+ frontend/src/components/about/InterestsSection.tsx |  31 ++
+ frontend/src/components/about/IntroSection.tsx     |  40 +++
+ .../src/components/about/PhilosophySection.tsx     |  37 ++
+ frontend/src/components/about/SFJourneySection.tsx |  19 +
+ .../src/components/about/TurningPointSection.tsx   |  27 ++
+ frontend/src/components/about/YaleSection.tsx      |  29 ++
+ frontend/src/components/about/index.ts             |  10 +
+ frontend/src/hooks/useScrollSpy.ts                 |  43 +++
+ frontend/src/pages/About.tsx                       | 384 ++-------------------
+ frontend/src/types/index.ts                        |  18 +
+ 19 files changed, 698 insertions(+), 350 deletions(-)
+-e 
+### FULL DIFF ###
+diff --git a/commit_details.txt b/commit_details.txt
+new file mode 100644
+index 0000000..cb88f31
+--- /dev/null
++++ b/commit_details.txt
+@@ -0,0 +1,170 @@
++### DIFF ###
++ frontend/src/Layout.tsx                    | 24 +++++++++---------------
++ frontend/src/pages/ProfessionalHistory.tsx |  7 +++++++
++ frontend/src/router.tsx                    |  7 ++++++-
++ 3 files changed, 22 insertions(+), 16 deletions(-)
++-e 
++### FULL DIFF ###
++diff --git a/frontend/src/Layout.tsx b/frontend/src/Layout.tsx
++index d4512d7..686a2a3 100644
++--- a/frontend/src/Layout.tsx
+++++ b/frontend/src/Layout.tsx
++@@ -1,21 +1,15 @@
++ import { Link, Outlet } from "react-router";
++-
++-const links = [
++-  {
++-    label: "home",
++-    href: "/",
++-  },
++-  {
++-    label: "about",
++-    href: "/about",
++-  },
++-  {
++-    label: "resume",
++-    href: "/resume",
++-  },
++-];
+++import { routes } from "./router";
++ 
++ const RootLayout = () => {
+++  const pathsUnderLayout = routes[0].children;
+++
+++
+++  const links = pathsUnderLayout.map((path) => ({
+++    label: path.path === "/" ? "home" : path.path.replace("/", "").replace(/-/g, " "),
+++    href: path.path,
+++    element: path.element,
+++  }));
++   return (
++     <div className="flex flex-col items-center min-h-screen bg-white text-black font-sans">
++       <nav className="w-full flex justify-center p-8 mb-0">
++diff --git a/frontend/src/pages/ProfessionalHistory.tsx b/frontend/src/pages/ProfessionalHistory.tsx
++new file mode 100644
++index 0000000..c7f962c
++--- /dev/null
+++++ b/frontend/src/pages/ProfessionalHistory.tsx
++@@ -0,0 +1,7 @@
+++const ProfessionalHistory = () => {
+++  return (
+++    <div>ProfessionalHistory</div>
+++  )
+++}
+++
+++export default ProfessionalHistory
++\ No newline at end of file
++diff --git a/frontend/src/router.tsx b/frontend/src/router.tsx
++index b517b75..7f1d6da 100644
++--- a/frontend/src/router.tsx
+++++ b/frontend/src/router.tsx
++@@ -3,8 +3,9 @@ import Homepage from "./pages/Homepage";
++ import RootLayout from "./Layout";
++ import ResumePage from "./pages/Resume";
++ import AboutPage from "./pages/About";
+++import ProfessionalHistory from "./pages/ProfessionalHistory";
++ 
++-const routes = [
+++export const routes = [
++   {
++     element: <RootLayout />,
++     children: [
++@@ -20,6 +21,10 @@ const routes = [
++         path: "/about",
++         element: <AboutPage />,
++       },
+++      {
+++        path: "/professional-history",
+++        element: <ProfessionalHistory />,
+++      },
++     ],
++   },
++ ];
++-e 
++### FILE CONTENTS (SELECTED) ###
++
++### frontend/src/Layout.tsx ###
++import { Link, Outlet } from "react-router";
++import { routes } from "./router";
++
++const RootLayout = () => {
++  const pathsUnderLayout = routes[0].children;
++
++
++  const links = pathsUnderLayout.map((path) => ({
++    label: path.path === "/" ? "home" : path.path.replace("/", "").replace(/-/g, " "),
++    href: path.path,
++    element: path.element,
++  }));
++  return (
++    <div className="flex flex-col items-center min-h-screen bg-white text-black font-sans">
++      <nav className="w-full flex justify-center p-8 mb-0">
++        <ul className="flex gap-8">
++          {links.map((link) => (
++            <li key={link.label}>
++              <Link
++                to={link.href}
++                className="text-base lowercase tracking-wide text-neutral-700 hover:text-green-600 transition-colors px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-green-600/20"
++              >
++                {link.label}
++              </Link>
++            </li>
++          ))}
++        </ul>
++      </nav>
++      <main className="flex-1 w-full flex justify-center">
++        <Outlet />
++      </main>
++    </div>
++  );
++};
++
++export default RootLayout;
++-e 
++
++### frontend/src/pages/ProfessionalHistory.tsx ###
++const ProfessionalHistory = () => {
++  return (
++    <div>ProfessionalHistory</div>
++  )
++}
++
++export default ProfessionalHistory-e 
++
++### frontend/src/router.tsx ###
++import { createBrowserRouter } from "react-router";
++import Homepage from "./pages/Homepage";
++import RootLayout from "./Layout";
++import ResumePage from "./pages/Resume";
++import AboutPage from "./pages/About";
++import ProfessionalHistory from "./pages/ProfessionalHistory";
++
++export const routes = [
++  {
++    element: <RootLayout />,
++    children: [
++      {
++        path: "/",
++        element: <Homepage />,
++      },
++      {
++        path: "/resume",
++        element: <ResumePage />,
++      },
++      {
++        path: "/about",
++        element: <AboutPage />,
++      },
++      {
++        path: "/professional-history",
++        element: <ProfessionalHistory />,
++      },
++    ],
++  },
++];
++
++const router = createBrowserRouter(routes);
++
++export default router;
++-e 
++
+diff --git a/frontend/.claude/task2.md b/frontend/.claude/task2.md
+new file mode 100644
+index 0000000..9947a4c
+--- /dev/null
++++ b/frontend/.claude/task2.md
+@@ -0,0 +1,15 @@
++There is a professional history route that we setup in ProfessionalHistory.tsx. It is hooked up into the router and can be seen in the header links. 
++
++For this page, I want to visualize a timeline, a compact timeline of my professional history. 
++
++Dates are not as important as time ranges. Each section will have a start time and end time, ideally the end of one should be the srart of the next. 
++
++In terms of a UI, we are still holding to our black and white minimalist style. But let your inspiration run, and build me something simple that still evokes the concept and feeling of a timeline, in the physics sense of that word. 
++
++My resume content is at public/resume.md. Convert the points for each experience into a narrative. Brief points are good for resume, but when somebody is reading you want to make what you have written readable, brief and not overstaying the welcome of the attention it gets. 
++
++Each experience, should be like an island in time, should connect to the next by a thread. The thread floppy, not awlasy straight but what ti does unfailingly, is to hold together time that you have lived through.
++
++I want recruiters and VC to be able to get a broadstroke and then also read deeper if intrigued.
++
++Localize your changes to the ProfessionalHistory page. Incorporate a table of component (it's prebuilt, see how to use it in ai-docs/available-to-use.md)
+\ No newline at end of file
+diff --git a/frontend/ai-docs/available-to-use.md b/frontend/ai-docs/available-to-use.md
+new file mode 100644
+index 0000000..0d97122
+--- /dev/null
++++ b/frontend/ai-docs/available-to-use.md
+@@ -0,0 +1,51 @@
++# Available Components for AI Use
++
++## TableOfContents
++
++**Location**: `src/components/TableOfContents.tsx`
++
++### Description
++A sticky table of contents component designed for long-form content pages. Provides navigation links for page sections with active section highlighting.
++
++### How it's built
++- React functional component with TypeScript
++- Uses Tailwind CSS for styling with neutral color scheme and green accent
++- Sticky positioned on large screens, hidden on mobile/tablet
++- Clickable navigation items with hover and active states
++- Left border design pattern consistent with site aesthetic
++
++### Usage
++```tsx
++import { TableOfContents } from "@/components/TableOfContents";
++
++const items = [
++  { id: "intro", label: "Introduction" },
++  { id: "philosophy", label: "Philosophy" },
++  { id: "contact", label: "Contact" }
++];
++
++<TableOfContents
++  items={items}
++  activeSection={activeSection}
++  onSectionClick={handleSectionClick}
++  className="optional-additional-classes"
++/>
++```
++
++### Props
++- `items`: Array of `TocItem` objects with `id` and `label`
++- `activeSection`: String ID of currently active section
++- `onSectionClick`: Callback function that receives section ID when clicked
++- `className`: Optional additional CSS classes
++
++### Dependencies
++- Requires `TableOfContentsProps` and `TocItem` types from `@/types`
++- Works with scroll spy functionality (see `useScrollSpy` hook)
++- Pairs well with `ContentSection` component for structured page layout
++
++### Styling Notes
++- Hidden on screens smaller than `lg` (1024px)
++- Fixed width of 256px (`w-64`)
++- Sticky positioned 32px from top (`top-8`)
++- Uses green-600 for active/hover states matching site theme
++- Left border with neutral-200 color and 16px padding
+\ No newline at end of file
+diff --git a/frontend/src/components/ContentSection.tsx b/frontend/src/components/ContentSection.tsx
+new file mode 100644
+index 0000000..1a459ab
+--- /dev/null
++++ b/frontend/src/components/ContentSection.tsx
+@@ -0,0 +1,18 @@
++import React from "react";
++import type { ContentSectionProps } from "@/types";
++
++export const ContentSection: React.FC<ContentSectionProps> = ({
++  id,
++  title,
++  children,
++  className = "shadow-md bg-white rounded-lg p-6"
++}) => {
++  return (
++    <section id={id} className={className}>
++      <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
++        {title}
++      </h2>
++      {children}
++    </section>
++  );
++};
+\ No newline at end of file
+diff --git a/frontend/src/components/TableOfContents.tsx b/frontend/src/components/TableOfContents.tsx
+new file mode 100644
+index 0000000..510db27
+--- /dev/null
++++ b/frontend/src/components/TableOfContents.tsx
+@@ -0,0 +1,35 @@
++import React from "react";
++import type { TableOfContentsProps } from "@/types";
++
++export const TableOfContents: React.FC<TableOfContentsProps> = ({
++  items,
++  activeSection,
++  onSectionClick,
++  className = ""
++}) => {
++  return (
++    <aside className={`hidden lg:block w-64 sticky top-8 h-fit ${className}`}>
++      <nav className="border-l border-neutral-200 pl-4">
++        <h3 className="text-sm font-medium text-neutral-600 mb-4">
++          On this page
++        </h3>
++        <ul className="space-y-2">
++          {items.map((item) => (
++            <li key={item.id}>
++              <button
++                onClick={() => onSectionClick(item.id)}
++                className={`text-sm text-left hover:text-green-600 transition-colors ${
++                  activeSection === item.id
++                    ? "text-green-600 font-medium"
++                    : "text-neutral-600"
++                }`}
++              >
++                {item.label}
++              </button>
++            </li>
++          ))}
++        </ul>
++      </nav>
++    </aside>
++  );
++};
+\ No newline at end of file
+diff --git a/frontend/src/components/about/BuildingSection.tsx b/frontend/src/components/about/BuildingSection.tsx
+new file mode 100644
+index 0000000..ca0471c
+--- /dev/null
++++ b/frontend/src/components/about/BuildingSection.tsx
+@@ -0,0 +1,39 @@
++import React from "react";
++import { ContentSection } from "../ContentSection";
++
++export const BuildingSection: React.FC = () => {
++  return (
++    <ContentSection id="building" title="Building & Learning">
++      <p>
++        Taught myself programming, AI, mathematics. Built
++        SideBrain (pre-ChatGPT RAG system), Rifflix
++        (text-to-animation), and ReqPal (AI recruiting). Learned
++        that the universe doesn't care about your cool ideas—only
++        whether they solve real problems. Shut down what didn't
++        work. Kept what did.
++      </p>
++      <p>
++        Somewhere along the way, found my muse in biology, when I
++        realized{" "}
++        <span className="underline decoration-green-600 decoration-3 underline-offset-4">
++          evolution is the ultimate algorithm
++        </span>
++        . Evolution creates order despite entropy, three and a
++        half billion years of pattern reinforcement. When I get
++        stuck on technical problems, I look to biology—it never
++        fails me.
++      </p>
++      <p>
++        <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
++          now
++        </span>
++        Building truly autonomous AI agents with event-driven
++        architecture and conversational operating systems. No
++        frameworks, just first principles. Working on elevating
++        the long tail of human talent—those brilliant people whose
++        resumes don't have the right stamps but whose potential is
++        limitless.
++      </p>
++    </ContentSection>
++  );
++};
+\ No newline at end of file
+diff --git a/frontend/src/components/about/ContactLinks.tsx b/frontend/src/components/about/ContactLinks.tsx
+new file mode 100644
+index 0000000..8572313
+--- /dev/null
++++ b/frontend/src/components/about/ContactLinks.tsx
+@@ -0,0 +1,27 @@
++import React from "react";
++
++export const ContactLinks: React.FC = () => {
++  return (
++    <div className="flex flex-wrap gap-4 mt-12 pt-8 border-t border-neutral-200">
++      <a
++        href="https://www.linkedin.com/in/anudeep-yegireddi/"
++        target="_blank"
++        rel="noopener noreferrer"
++        className="text-green-600 hover:text-green-700 underline underline-offset-2 text-sm lowercase transition-colors"
++      >
++        linkedin
++      </a>
++      <span className="text-neutral-400">•</span>
++      <a
++        href="mailto:anudeep@aya.yale.edu"
++        className="text-green-600 hover:text-green-700 underline underline-offset-2 text-sm lowercase transition-colors"
++      >
++        email
++      </a>
++      <span className="text-neutral-400">•</span>
++      <span className="text-neutral-600 text-sm lowercase">
++        bay area, ca
++      </span>
++    </div>
++  );
++};
+\ No newline at end of file
+diff --git a/frontend/src/components/about/CurrentSection.tsx b/frontend/src/components/about/CurrentSection.tsx
+new file mode 100644
+index 0000000..ee05800
+--- /dev/null
++++ b/frontend/src/components/about/CurrentSection.tsx
+@@ -0,0 +1,22 @@
++import React from "react";
++import { ContentSection } from "../ContentSection";
++
++export const CurrentSection: React.FC = () => {
++  return (
++    <ContentSection 
++      id="current" 
++      title="Where I Am Right Now"
++      className="shadow-md bg-white rounded-lg p-6 mt-12 pt-8 border-t border-neutral-200"
++    >
++      <p>
++        I recently exited a startup where we built AI interviewer
++        tools. Now I'm looking around for my next opportunity,
++        noodling on some things I want to build, and open to
++        opportunities where I get to bring both my product and
++        engineering capabilities—the depth in both—to solve hard
++        problems. Hard not just technically, but from a product
++        and consumer standpoint as well.
++      </p>
++    </ContentSection>
++  );
++};
+\ No newline at end of file
+diff --git a/frontend/src/components/about/EarlyDaysSection.tsx b/frontend/src/components/about/EarlyDaysSection.tsx
+new file mode 100644
+index 0000000..883434d
+--- /dev/null
++++ b/frontend/src/components/about/EarlyDaysSection.tsx
+@@ -0,0 +1,33 @@
++import React from "react";
++import { ContentSection } from "../ContentSection";
++
++export const EarlyDaysSection: React.FC = () => {
++  return (
++    <ContentSection id="early-days" title="Early Days">
++      <p>
++        <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
++          pre 2014
++        </span>
++        Grew up moving around a lot, switching curriculums and
++        schools. Read a lot, participated in quizzes. Once, Dad
++        bought me a microscope from a work trip to Germany and I
++        brought it to school and set up samples, showing all my
++        friends what blood, skin, and hair look like at the
++        microscopic level. I was confident but undirected. In
++        engineering, I studied computer science but yearned to be
++        a mechanical engineer. I reluctantly accepted CS. Tried
++        running away from tech by doing consulting, but slowly and
++        surely I found my own way back to tech.
++      </p>
++      <p>
++        <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
++          2014
++        </span>
++        Fell in love with product management from India, dreamed
++        of San Francisco. Took me two years and countless
++        rejections to get into Yale—the only school that gave me a
++        shot.
++      </p>
++    </ContentSection>
++  );
++};
+\ No newline at end of file
+diff --git a/frontend/src/components/about/InterestsSection.tsx b/frontend/src/components/about/InterestsSection.tsx
+new file mode 100644
+index 0000000..521f179
+--- /dev/null
++++ b/frontend/src/components/about/InterestsSection.tsx
+@@ -0,0 +1,31 @@
++import React from "react";
++import { ContentSection } from "../ContentSection";
++
++export const InterestsSection: React.FC = () => {
++  return (
++    <ContentSection 
++      id="interests" 
++      title="Areas of Interest"
++      className="shadow-md bg-white rounded-lg p-6 mt-12 pt-8 border-t border-neutral-200"
++    >
++      <p>
++        What truly captivates me right now is building
++        self-improving agents and novel cognitive architectures.
++        I'm particularly interested in memory as a symbolic
++        representation of consciousness—where levels of
++        association lead to different sparking intensities. I
++        believe that in memory is where our self lives.
++      </p>
++      <p className="mt-4">
++        Without a strong memory of the past, we wouldn't have a
++        strong sense of identity. Identity is built on our memory.
++        So building novel cognitive architectures that incorporate
++        the neuroscience of how the brain works—understanding how
++        degrees of life as a being begin—is something I'm deeply
++        passionate about. This includes building reasoning models,
++        self-improving agents, and memory architectures aligned
++        with our understanding of the brain.
++      </p>
++    </ContentSection>
++  );
++};
+\ No newline at end of file
+diff --git a/frontend/src/components/about/IntroSection.tsx b/frontend/src/components/about/IntroSection.tsx
+new file mode 100644
+index 0000000..3227148
+--- /dev/null
++++ b/frontend/src/components/about/IntroSection.tsx
+@@ -0,0 +1,40 @@
++import React from "react";
++
++export const IntroSection: React.FC = () => {
++  return (
++    <section
++      id="intro"
++      className="flex flex-col gap-6 text-black mt-12 mb-16"
++    >
++      <header className="flex flex-col gap-2">
++        <h1 className="text-3xl font-normal lowercase tracking-tight">
++          hi, i'm anudeep
++        </h1>
++        <p className="text-lg text-neutral-600 lowercase italic">
++          engineer, founder, late bloomer
++        </p>
++      </header>
++      <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
++        Introduction
++      </h2>
++      <div className="flex flex-col gap-1 text-sm">
++        <div className="flex items-center rounded-full px-3 py-1">
++          <span className="inline-block bg-black text-white px-3 py-1 rounded-full text-xs font-medium w-16 text-center">
++            current
++          </span>
++          <span className="text-neutral-800 ml-2">
++            building ai agents that actually work
++          </span>
++        </div>
++        <div className="flex items-center rounded-full px-3 py-1">
++          <span className="inline-block bg-black text-white px-3 py-1 rounded-full text-xs font-medium w-16 text-center">
++            prev
++          </span>
++          <span className="text-neutral-800 ml-2">
++            yale mba • apple • two exits • founding engineer
++          </span>
++        </div>
++      </div>
++    </section>
++  );
++};
+\ No newline at end of file
+diff --git a/frontend/src/components/about/PhilosophySection.tsx b/frontend/src/components/about/PhilosophySection.tsx
+new file mode 100644
+index 0000000..d3aeeff
+--- /dev/null
++++ b/frontend/src/components/about/PhilosophySection.tsx
+@@ -0,0 +1,37 @@
++import React from "react";
++import { ContentSection } from "../ContentSection";
++
++export const PhilosophySection: React.FC = () => {
++  return (
++    <ContentSection 
++      id="philosophy" 
++      title="Philosophy"
++      className="shadow-md bg-white rounded-lg p-6 mt-12 pt-8 border-t border-neutral-200"
++    >
++      <p>
++        I believe what we call creativity is a resonance of
++        patterns already present in nature—from the elegant
++        machinery of proteins acting as molecular motors, to their
++        roles in signal transmission and threat detection. Our
++        innovations are echoes of solutions that biology perfected
++        eons ago. But that's the beauty. We're pattern matchers,
++        connection makers, bridge builders between what is and
++        what could be.
++      </p>
++
++      <p className="text-center italic text-neutral-600 my-8 text-lg">
++        {/* <span className="underline decoration-green-600 decoration-3 underline-offset-4">
++          The distance from idea to creation should be zero
++        </span> */}
++      </p>
++
++      <p>
++        These days you'll find me thinking about reinforcement
++        learning, reading molecular biology papers, or building
++        systems that help talented people find opportunities.
++        Still the same person who learned that love is permanent,
++        not passing. Still betting on myself.
++      </p>
++    </ContentSection>
++  );
++};
+\ No newline at end of file
+diff --git a/frontend/src/components/about/SFJourneySection.tsx b/frontend/src/components/about/SFJourneySection.tsx
+new file mode 100644
+index 0000000..d865c87
+--- /dev/null
++++ b/frontend/src/components/about/SFJourneySection.tsx
+@@ -0,0 +1,19 @@
++import React from "react";
++import { ContentSection } from "../ContentSection";
++
++export const SFJourneySection: React.FC = () => {
++  return (
++    <ContentSection id="sf-journey" title="San Francisco Journey">
++      <p>
++        <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
++          2017
++        </span>
++        Moved to SF with no job, slept on couches for 9 months.
++        Everyone said "beggars can't be choosers," but I held out
++        for what I wanted. Got it. Worked directly with founders
++        and realized they're just human. Anyone can build
++        something.
++      </p>
++    </ContentSection>
++  );
++};
+\ No newline at end of file
+diff --git a/frontend/src/components/about/TurningPointSection.tsx b/frontend/src/components/about/TurningPointSection.tsx
+new file mode 100644
+index 0000000..cf8b1b7
+--- /dev/null
++++ b/frontend/src/components/about/TurningPointSection.tsx
+@@ -0,0 +1,27 @@
++import React from "react";
++import { ContentSection } from "../ContentSection";
++
++export const TurningPointSection: React.FC = () => {
++  return (
++    <ContentSection id="turning-point" title="The Turning Point">
++      <p>
++        <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
++          2021
++        </span>
++        The turning point. Pandemic hit, was deep in educating
++        myself on biology when GPT-3 launched, and I saw
++        transformer architecture mirroring Wernicke's and Broca's
++        areas in the brain.{" "}
++        <span className="underline decoration-green-600 decoration-3 underline-offset-4">
++          Lightning strike of clarity
++        </span>
++        . I exited the company, abandoned all immediate plans to
++        stay in SF, and flew back to India.
++      </p>
++      <p className="text-center italic text-neutral-600 my-8 text-lg">
++        Spent the next four years becoming the person I needed to
++        be
++      </p>
++    </ContentSection>
++  );
++};
+\ No newline at end of file
+diff --git a/frontend/src/components/about/YaleSection.tsx b/frontend/src/components/about/YaleSection.tsx
+new file mode 100644
+index 0000000..fc547ef
+--- /dev/null
++++ b/frontend/src/components/about/YaleSection.tsx
+@@ -0,0 +1,29 @@
++import React from "react";
++import { ContentSection } from "../ContentSection";
++
++export const YaleSection: React.FC = () => {
++  return (
++    <ContentSection id="yale" title="Yale & Transformation">
++      <p>
++        At Yale, everything changed. Found a philosophy class that{" "}
++        <span className="underline decoration-green-600 decoration-3 underline-offset-4">
++          rewired how I think.{" "}
++        </span>
++        Spent 9 months forcing my brain to connect every new idea
++        to something I already knew, decomposing thoughts until I
++        hit first principles. Uncomfortable as hell, but it
++        worked. Eventually all knowledge felt
++        interconnected—biology, physics, AI, spirituality,
++        everything resonating across the same trunk of truth.
++      </p>
++      <p>
++        I also interned at Apple, and started a company one after
++        the other. Worked on high-profile projects such as App
++        Store Redesign and Single Sign-On, but still, the fun I
++        had at the startup had my heart. Came back, knew that I
++        wanted to work as a PM at an early-stage startup. It was
++        not an easy decision.
++      </p>
++    </ContentSection>
++  );
++};
+\ No newline at end of file
+diff --git a/frontend/src/components/about/index.ts b/frontend/src/components/about/index.ts
+new file mode 100644
+index 0000000..afb1801
+--- /dev/null
++++ b/frontend/src/components/about/index.ts
+@@ -0,0 +1,10 @@
++export { IntroSection } from "./IntroSection";
++export { EarlyDaysSection } from "./EarlyDaysSection";
++export { YaleSection } from "./YaleSection";
++export { SFJourneySection } from "./SFJourneySection";
++export { TurningPointSection } from "./TurningPointSection";
++export { BuildingSection } from "./BuildingSection";
++export { PhilosophySection } from "./PhilosophySection";
++export { InterestsSection } from "./InterestsSection";
++export { CurrentSection } from "./CurrentSection";
++export { ContactLinks } from "./ContactLinks";
+\ No newline at end of file
+diff --git a/frontend/src/hooks/useScrollSpy.ts b/frontend/src/hooks/useScrollSpy.ts
+new file mode 100644
+index 0000000..ca6be5f
+--- /dev/null
++++ b/frontend/src/hooks/useScrollSpy.ts
+@@ -0,0 +1,43 @@
++import { useEffect, useState } from "react";
++
++export const useScrollSpy = () => {
++  const [activeSection, setActiveSection] = useState<string>("");
++
++  useEffect(() => {
++    const handleScroll = () => {
++      const sections = document.querySelectorAll("section[id]");
++      let current = "";
++
++      sections.forEach((section) => {
++        const rect = section.getBoundingClientRect();
++        if (rect.top <= 100 && rect.bottom > 100) {
++          current = section.id;
++        }
++      });
++
++      // If at the bottom of the page, highlight the last section
++      if (
++        window.innerHeight + window.scrollY >=
++        document.body.offsetHeight - 2 // allow for rounding errors
++      ) {
++        const lastSection = sections[sections.length - 1];
++        if (lastSection) {
++          current = lastSection.id;
++        }
++      }
++
++      setActiveSection(current);
++    };
++
++    window.addEventListener("scroll", handleScroll);
++    handleScroll();
++
++    return () => window.removeEventListener("scroll", handleScroll);
++  }, []);
++
++  const scrollToSection = (id: string) => {
++    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
++  };
++
++  return { activeSection, scrollToSection };
++};
+\ No newline at end of file
+diff --git a/frontend/src/pages/About.tsx b/frontend/src/pages/About.tsx
+index 0cda43a..47febc7 100644
+--- a/frontend/src/pages/About.tsx
++++ b/frontend/src/pages/About.tsx
+@@ -1,45 +1,24 @@
+-import React, { useEffect, useState } from "react";
++import React from "react";
++import { TableOfContents } from "@/components/TableOfContents";
++import { useScrollSpy } from "@/hooks/useScrollSpy";
++import type { TocItem } from "@/types";
++import {
++  IntroSection,
++  EarlyDaysSection,
++  YaleSection,
++  SFJourneySection,
++  TurningPointSection,
++  BuildingSection,
++  PhilosophySection,
++  InterestsSection,
++  CurrentSection,
++  ContactLinks,
++} from "@/components/about";
+ 
+ const About: React.FC = () => {
+-  const [activeSection, setActiveSection] = useState<string>("");
++  const { activeSection, scrollToSection } = useScrollSpy();
+ 
+-  useEffect(() => {
+-    const handleScroll = () => {
+-      const sections = document.querySelectorAll("section[id]");
+-      let current = "";
+-
+-      sections.forEach((section) => {
+-        const rect = section.getBoundingClientRect();
+-        if (rect.top <= 100 && rect.bottom > 100) {
+-          current = section.id;
+-        }
+-      });
+-
+-      // If at the bottom of the page, highlight the last section
+-      if (
+-        window.innerHeight + window.scrollY >=
+-        document.body.offsetHeight - 2 // allow for rounding errors
+-      ) {
+-        const lastSection = sections[sections.length - 1];
+-        if (lastSection) {
+-          current = lastSection.id;
+-        }
+-      }
+-
+-      setActiveSection(current);
+-    };
+-
+-    window.addEventListener("scroll", handleScroll);
+-    handleScroll();
+-
+-    return () => window.removeEventListener("scroll", handleScroll);
+-  }, []);
+-
+-  const scrollToSection = (id: string) => {
+-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+-  };
+-
+-  const tocItems = [
++  const tocItems: TocItem[] = [
+     { id: "intro", label: "Introduction" },
+     { id: "early-days", label: "Early Days" },
+     { id: "yale", label: "Yale & Transformation" },
+@@ -53,324 +32,29 @@ const About: React.FC = () => {
+ 
+   return (
+     <div className="relative w-full max-w-6xl mx-auto px-4 flex gap-8">
+-      {/* Table of Contents */}
+-      <aside className="hidden lg:block w-64 sticky top-8 h-fit">
+-        <nav className="border-l border-neutral-200 pl-4">
+-          <h3 className="text-sm font-medium text-neutral-600 mb-4">
+-            On this page
+-          </h3>
+-          <ul className="space-y-2">
+-            {tocItems.map((item) => (
+-              <li key={item.id}>
+-                <button
+-                  onClick={() => scrollToSection(item.id)}
+-                  className={`text-sm text-left hover:text-green-600 transition-colors ${
+-                    activeSection === item.id
+-                      ? "text-green-600 font-medium"
+-                      : "text-neutral-600"
+-                  }`}
+-                >
+-                  {item.label}
+-                </button>
+-              </li>
+-            ))}
+-          </ul>
+-        </nav>
+-      </aside>
++      <TableOfContents
++        items={tocItems}
++        activeSection={activeSection}
++        onSectionClick={scrollToSection}
++      />
+ 
+-      {/* Main Content */}
+       <article className="flex-1 max-w-2xl mx-auto pb-20">
+-        <section
+-          id="intro"
+-          className="flex flex-col gap-6 text-black mt-12 mb-16"
+-        >
+-          <header className="flex flex-col gap-2">
+-            <h1 className="text-3xl font-normal lowercase tracking-tight">
+-              hi, i'm anudeep
+-            </h1>
+-            <p className="text-lg text-neutral-600 lowercase italic">
+-              engineer, founder, late bloomer
+-            </p>
+-          </header>
+-          <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
+-            Introduction
+-          </h2>
+-          <div className="flex flex-col gap-1 text-sm">
+-            <div className="flex items-center rounded-full px-3 py-1">
+-              <span className="inline-block bg-black text-white px-3 py-1 rounded-full text-xs font-medium w-16 text-center">
+-                current
+-              </span>
+-              <span className="text-neutral-800 ml-2">
+-                building ai agents that actually work
+-              </span>
+-            </div>
+-            <div className="flex items-center rounded-full px-3 py-1">
+-              <span className="inline-block bg-black text-white px-3 py-1 rounded-full text-xs font-medium w-16 text-center">
+-                prev
+-              </span>
+-              <span className="text-neutral-800 ml-2">
+-                yale mba • apple • two exits • founding engineer
+-              </span>
+-            </div>
+-          </div>
+-        </section>
++        <IntroSection />
+ 
+         <div className="text-base leading-relaxed text-neutral-800 space-y-6">
+-          {/* 2014 Section */}
+-          <section
+-            id="early-days"
+-            className="shadow-md bg-white rounded-lg p-6"
+-          >
+-            <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
+-              Early Days
+-            </h2>
+-            <p>
+-              <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
+-                pre 2014
+-              </span>
+-              Grew up moving around a lot, switching curriculums and
+-              schools. Read a lot, participated in quizzes. Once, Dad
+-              bought me a microscope from a work trip to Germany and I
+-              brought it to school and set up samples, showing all my
+-              friends what blood, skin, and hair look like at the
+-              microscopic level. I was confident but undirected. In
+-              engineering, I studied computer science but yearned to be
+-              a mechanical engineer. I reluctantly accepted CS. Tried
+-              running away from tech by doing consulting, but slowly and
+-              surely I found my own way back to tech.
+-            </p>
+-            <p>
+-              <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
+-                2014
+-              </span>
+-              Fell in love with product management from India, dreamed
+-              of San Francisco. Took me two years and countless
+-              rejections to get into Yale—the only school that gave me a
+-              shot.
+-            </p>
+-          </section>
+-
+-          {/* Yale Section */}
+-          <section
+-            id="yale"
+-            className="shadow-md bg-white rounded-lg p-6"
+-          >
+-            <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
+-              Yale & Transformation
+-            </h2>
+-            <p>
+-              At Yale, everything changed. Found a philosophy class that{" "}
+-              <span className="underline decoration-green-600 decoration-3 underline-offset-4">
+-                rewired how I think.{" "}
+-              </span>
+-              Spent 9 months forcing my brain to connect every new idea
+-              to something I already knew, decomposing thoughts until I
+-              hit first principles. Uncomfortable as hell, but it
+-              worked. Eventually all knowledge felt
+-              interconnected—biology, physics, AI, spirituality,
+-              everything resonating across the same trunk of truth.
+-            </p>
+-            <p>
+-              I also interned at Apple, and started a company one after
+-              the other. Worked on high-profile projects such as App
+-              Store Redesign and Single Sign-On, but still, the fun I
+-              had at the startup had my heart. Came back, knew that I
+-              wanted to work as a PM at an early-stage startup. It was
+-              not an easy decision.
+-            </p>
+-          </section>
+-
+-          {/* 2017 Section */}
+-          <section
+-            id="sf-journey"
+-            className="shadow-md bg-white rounded-lg p-6"
+-          >
+-            <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
+-              San Francisco Journey
+-            </h2>
+-            <p>
+-              <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
+-                2017
+-              </span>
+-              Moved to SF with no job, slept on couches for 9 months.
+-              Everyone said "beggars can't be choosers," but I held out
+-              for what I wanted. Got it. Worked directly with founders
+-              and realized they're just human. Anyone can build
+-              something.
+-            </p>
+-          </section>
+-
+-          {/* 2021 Section */}
+-          <section
+-            id="turning-point"
+-            className="shadow-md bg-white rounded-lg p-6"
+-          >
+-            <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
+-              The Turning Point
+-            </h2>
+-            <p>
+-              <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
+-                2021
+-              </span>
+-              The turning point. Pandemic hit, was deep in educating
+-              myself on biology when GPT-3 launched, and I saw
+-              transformer architecture mirroring Wernicke’s and Broca’s
+-              areas in the brain.{" "}
+-              <span className="underline decoration-green-600 decoration-3 underline-offset-4">
+-                Lightning strike of clarity
+-              </span>
+-              . I exited the company, abandoned all immediate plans to
+-              stay in SF, and flew back to India.
+-            </p>
+-            <p className="text-center italic text-neutral-600 my-8 text-lg">
+-              Spent the next four years becoming the person I needed to
+-              be
+-            </p>
+-          </section>
+-
+-          {/* Now Section */}
+-          <section
+-            id="building"
+-            className="shadow-md bg-white rounded-lg p-6"
+-          >
+-            <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
+-              Building & Learning
+-            </h2>
+-            <p>
+-              Taught myself programming, AI, mathematics. Built
+-              SideBrain (pre-ChatGPT RAG system), Rifflix
+-              (text-to-animation), and ReqPal (AI recruiting). Learned
+-              that the universe doesn't care about your cool ideas—only
+-              whether they solve real problems. Shut down what didn't
+-              work. Kept what did.
+-            </p>
+-            <p>
+-              Somewhere along the way, found my muse in biology, when I
+-              realized{" "}
+-              <span className="underline decoration-green-600 decoration-3 underline-offset-4">
+-                evolution is the ultimate algorithm
+-              </span>
+-              . Evolution creates order despite entropy, three and a
+-              half billion years of pattern reinforcement. When I get
+-              stuck on technical problems, I look to biology—it never
+-              fails me.
+-            </p>
+-            <p>
+-              <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
+-                now
+-              </span>
+-              Building truly autonomous AI agents with event-driven
+-              architecture and conversational operating systems. No
+-              frameworks, just first principles. Working on elevating
+-              the long tail of human talent—those brilliant people whose
+-              resumes don't have the right stamps but whose potential is
+-              limitless.
+-            </p>
+-          </section>
+-
+-          <section
+-            id="philosophy"
+-            className="shadow-md bg-white rounded-lg p-6 mt-12 pt-8 border-t border-neutral-200"
+-          >
+-            <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
+-              Philosophy
+-            </h2>
+-            <p>
+-              I believe what we call creativity is a resonance of
+-              patterns already present in nature—from the elegant
+-              machinery of proteins acting as molecular motors, to their
+-              roles in signal transmission and threat detection. Our
+-              innovations are echoes of solutions that biology perfected
+-              eons ago. But that's the beauty. We're pattern matchers,
+-              connection makers, bridge builders between what is and
+-              what could be.
+-            </p>
+-
+-            <p className="text-center italic text-neutral-600 my-8 text-lg">
+-              {/* <span className="underline decoration-green-600 decoration-3 underline-offset-4">
+-                The distance from idea to creation should be zero
+-              </span> */}
+-            </p>
+-
+-            <p>
+-              These days you'll find me thinking about reinforcement
+-              learning, reading molecular biology papers, or building
+-              systems that help talented people find opportunities.
+-              Still the same person who learned that love is permanent,
+-              not passing. Still betting on myself.
+-            </p>
+-          </section>
+-
+-          <section
+-            id="interests"
+-            className="shadow-md bg-white rounded-lg p-6 mt-12 pt-8 border-t border-neutral-200"
+-          >
+-            <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
+-              Areas of Interest
+-            </h2>
+-            <p>
+-              What truly captivates me right now is building
+-              self-improving agents and novel cognitive architectures.
+-              I'm particularly interested in memory as a symbolic
+-              representation of consciousness—where levels of
+-              association lead to different sparking intensities. I
+-              believe that in memory is where our self lives.
+-            </p>
+-            <p className="mt-4">
+-              Without a strong memory of the past, we wouldn't have a
+-              strong sense of identity. Identity is built on our memory.
+-              So building novel cognitive architectures that incorporate
+-              the neuroscience of how the brain works—understanding how
+-              degrees of life as a being begin—is something I'm deeply
+-              passionate about. This includes building reasoning models,
+-              self-improving agents, and memory architectures aligned
+-              with our understanding of the brain.
+-            </p>
+-          </section>
+-
+-          <section
+-            id="current"
+-            className="shadow-md bg-white rounded-lg p-6 mt-12 pt-8 border-t border-neutral-200"
+-          >
+-            <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
+-              Where I Am Right Now
+-            </h2>
+-            <p>
+-              I recently exited a startup where we built AI interviewer
+-              tools. Now I'm looking around for my next opportunity,
+-              noodling on some things I want to build, and open to
+-              opportunities where I get to bring both my product and
+-              engineering capabilities—the depth in both—to solve hard
+-              problems. Hard not just technically, but from a product
+-              and consumer standpoint as well.
+-            </p>
+-          </section>
+-
+-          <div className="flex flex-wrap gap-4 mt-12 pt-8 border-t border-neutral-200">
+-            <a
+-              href="https://www.linkedin.com/in/anudeep-yegireddi/"
+-              target="_blank"
+-              rel="noopener noreferrer"
+-              className="text-green-600 hover:text-green-700 underline underline-offset-2 text-sm lowercase transition-colors"
+-            >
+-              linkedin
+-            </a>
+-            <span className="text-neutral-400">•</span>
+-            <a
+-              href="mailto:anudeep@aya.yale.edu"
+-              className="text-green-600 hover:text-green-700 underline underline-offset-2 text-sm lowercase transition-colors"
+-            >
+-              email
+-            </a>
+-            <span className="text-neutral-400">•</span>
+-            <span className="text-neutral-600 text-sm lowercase">
+-              bay area, ca
+-            </span>
+-          </div>
++          <EarlyDaysSection />
++          <YaleSection />
++          <SFJourneySection />
++          <TurningPointSection />
++          <BuildingSection />
++          <PhilosophySection />
++          <InterestsSection />
++          <CurrentSection />
++          <ContactLinks />
+         </div>
+       </article>
+     </div>
+   );
+ };
+ 
+-export default About;
++export default About;
+\ No newline at end of file
+diff --git a/frontend/src/types/index.ts b/frontend/src/types/index.ts
+new file mode 100644
+index 0000000..cb7a7cc
+--- /dev/null
++++ b/frontend/src/types/index.ts
+@@ -0,0 +1,18 @@
++export interface TocItem {
++  id: string;
++  label: string;
++}
++
++export interface TableOfContentsProps {
++  items: TocItem[];
++  activeSection: string;
++  onSectionClick: (id: string) => void;
++  className?: string;
++}
++
++export interface ContentSectionProps {
++  id: string;
++  title: string;
++  children: React.ReactNode;
++  className?: string;
++}
+\ No newline at end of file
+-e 
+### FILE CONTENTS (SELECTED) ###
+
+### frontend/.claude/task2.md ###
+There is a professional history route that we setup in ProfessionalHistory.tsx. It is hooked up into the router and can be seen in the header links. 
+
+For this page, I want to visualize a timeline, a compact timeline of my professional history. 
+
+Dates are not as important as time ranges. Each section will have a start time and end time, ideally the end of one should be the srart of the next. 
+
+In terms of a UI, we are still holding to our black and white minimalist style. But let your inspiration run, and build me something simple that still evokes the concept and feeling of a timeline, in the physics sense of that word. 
+
+My resume content is at public/resume.md. Convert the points for each experience into a narrative. Brief points are good for resume, but when somebody is reading you want to make what you have written readable, brief and not overstaying the welcome of the attention it gets. 
+
+Each experience, should be like an island in time, should connect to the next by a thread. The thread floppy, not awlasy straight but what ti does unfailingly, is to hold together time that you have lived through.
+
+I want recruiters and VC to be able to get a broadstroke and then also read deeper if intrigued.
+
+Localize your changes to the ProfessionalHistory page. Incorporate a table of component (it's prebuilt, see how to use it in ai-docs/available-to-use.md)-e 
+
+### frontend/ai-docs/available-to-use.md ###
+# Available Components for AI Use
+
+## TableOfContents
+
+**Location**: `src/components/TableOfContents.tsx`
+
+### Description
+A sticky table of contents component designed for long-form content pages. Provides navigation links for page sections with active section highlighting.
+
+### How it's built
+- React functional component with TypeScript
+- Uses Tailwind CSS for styling with neutral color scheme and green accent
+- Sticky positioned on large screens, hidden on mobile/tablet
+- Clickable navigation items with hover and active states
+- Left border design pattern consistent with site aesthetic
+
+### Usage
+```tsx
+import { TableOfContents } from "@/components/TableOfContents";
+
+const items = [
+  { id: "intro", label: "Introduction" },
+  { id: "philosophy", label: "Philosophy" },
+  { id: "contact", label: "Contact" }
+];
+
+<TableOfContents
+  items={items}
+  activeSection={activeSection}
+  onSectionClick={handleSectionClick}
+  className="optional-additional-classes"
+/>
+```
+
+### Props
+- `items`: Array of `TocItem` objects with `id` and `label`
+- `activeSection`: String ID of currently active section
+- `onSectionClick`: Callback function that receives section ID when clicked
+- `className`: Optional additional CSS classes
+
+### Dependencies
+- Requires `TableOfContentsProps` and `TocItem` types from `@/types`
+- Works with scroll spy functionality (see `useScrollSpy` hook)
+- Pairs well with `ContentSection` component for structured page layout
+
+### Styling Notes
+- Hidden on screens smaller than `lg` (1024px)
+- Fixed width of 256px (`w-64`)
+- Sticky positioned 32px from top (`top-8`)
+- Uses green-600 for active/hover states matching site theme
+- Left border with neutral-200 color and 16px padding-e 
+
+### frontend/src/components/ContentSection.tsx ###
+import React from "react";
+import type { ContentSectionProps } from "@/types";
+
+export const ContentSection: React.FC<ContentSectionProps> = ({
+  id,
+  title,
+  children,
+  className = "shadow-md bg-white rounded-lg p-6"
+}) => {
+  return (
+    <section id={id} className={className}>
+      <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
+        {title}
+      </h2>
+      {children}
+    </section>
+  );
+};-e 
+
+### frontend/src/components/TableOfContents.tsx ###
+import React from "react";
+import type { TableOfContentsProps } from "@/types";
+
+export const TableOfContents: React.FC<TableOfContentsProps> = ({
+  items,
+  activeSection,
+  onSectionClick,
+  className = ""
+}) => {
+  return (
+    <aside className={`hidden lg:block w-64 sticky top-8 h-fit ${className}`}>
+      <nav className="border-l border-neutral-200 pl-4">
+        <h3 className="text-sm font-medium text-neutral-600 mb-4">
+          On this page
+        </h3>
+        <ul className="space-y-2">
+          {items.map((item) => (
+            <li key={item.id}>
+              <button
+                onClick={() => onSectionClick(item.id)}
+                className={`text-sm text-left hover:text-green-600 transition-colors ${
+                  activeSection === item.id
+                    ? "text-green-600 font-medium"
+                    : "text-neutral-600"
+                }`}
+              >
+                {item.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
+  );
+};-e 
+
+### frontend/src/components/about/BuildingSection.tsx ###
+import React from "react";
+import { ContentSection } from "../ContentSection";
+
+export const BuildingSection: React.FC = () => {
+  return (
+    <ContentSection id="building" title="Building & Learning">
+      <p>
+        Taught myself programming, AI, mathematics. Built
+        SideBrain (pre-ChatGPT RAG system), Rifflix
+        (text-to-animation), and ReqPal (AI recruiting). Learned
+        that the universe doesn't care about your cool ideas—only
+        whether they solve real problems. Shut down what didn't
+        work. Kept what did.
+      </p>
+      <p>
+        Somewhere along the way, found my muse in biology, when I
+        realized{" "}
+        <span className="underline decoration-green-600 decoration-3 underline-offset-4">
+          evolution is the ultimate algorithm
+        </span>
+        . Evolution creates order despite entropy, three and a
+        half billion years of pattern reinforcement. When I get
+        stuck on technical problems, I look to biology—it never
+        fails me.
+      </p>
+      <p>
+        <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
+          now
+        </span>
+        Building truly autonomous AI agents with event-driven
+        architecture and conversational operating systems. No
+        frameworks, just first principles. Working on elevating
+        the long tail of human talent—those brilliant people whose
+        resumes don't have the right stamps but whose potential is
+        limitless.
+      </p>
+    </ContentSection>
+  );
+};-e 
+
+### frontend/src/components/about/ContactLinks.tsx ###
+import React from "react";
+
+export const ContactLinks: React.FC = () => {
+  return (
+    <div className="flex flex-wrap gap-4 mt-12 pt-8 border-t border-neutral-200">
+      <a
+        href="https://www.linkedin.com/in/anudeep-yegireddi/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-green-600 hover:text-green-700 underline underline-offset-2 text-sm lowercase transition-colors"
+      >
+        linkedin
+      </a>
+      <span className="text-neutral-400">•</span>
+      <a
+        href="mailto:anudeep@aya.yale.edu"
+        className="text-green-600 hover:text-green-700 underline underline-offset-2 text-sm lowercase transition-colors"
+      >
+        email
+      </a>
+      <span className="text-neutral-400">•</span>
+      <span className="text-neutral-600 text-sm lowercase">
+        bay area, ca
+      </span>
+    </div>
+  );
+};-e 
+
+### frontend/src/components/about/CurrentSection.tsx ###
+import React from "react";
+import { ContentSection } from "../ContentSection";
+
+export const CurrentSection: React.FC = () => {
+  return (
+    <ContentSection 
+      id="current" 
+      title="Where I Am Right Now"
+      className="shadow-md bg-white rounded-lg p-6 mt-12 pt-8 border-t border-neutral-200"
+    >
+      <p>
+        I recently exited a startup where we built AI interviewer
+        tools. Now I'm looking around for my next opportunity,
+        noodling on some things I want to build, and open to
+        opportunities where I get to bring both my product and
+        engineering capabilities—the depth in both—to solve hard
+        problems. Hard not just technically, but from a product
+        and consumer standpoint as well.
+      </p>
+    </ContentSection>
+  );
+};-e 
+
+### frontend/src/components/about/EarlyDaysSection.tsx ###
+import React from "react";
+import { ContentSection } from "../ContentSection";
+
+export const EarlyDaysSection: React.FC = () => {
+  return (
+    <ContentSection id="early-days" title="Early Days">
+      <p>
+        <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
+          pre 2014
+        </span>
+        Grew up moving around a lot, switching curriculums and
+        schools. Read a lot, participated in quizzes. Once, Dad
+        bought me a microscope from a work trip to Germany and I
+        brought it to school and set up samples, showing all my
+        friends what blood, skin, and hair look like at the
+        microscopic level. I was confident but undirected. In
+        engineering, I studied computer science but yearned to be
+        a mechanical engineer. I reluctantly accepted CS. Tried
+        running away from tech by doing consulting, but slowly and
+        surely I found my own way back to tech.
+      </p>
+      <p>
+        <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
+          2014
+        </span>
+        Fell in love with product management from India, dreamed
+        of San Francisco. Took me two years and countless
+        rejections to get into Yale—the only school that gave me a
+        shot.
+      </p>
+    </ContentSection>
+  );
+};-e 
+
+### frontend/src/components/about/InterestsSection.tsx ###
+import React from "react";
+import { ContentSection } from "../ContentSection";
+
+export const InterestsSection: React.FC = () => {
+  return (
+    <ContentSection 
+      id="interests" 
+      title="Areas of Interest"
+      className="shadow-md bg-white rounded-lg p-6 mt-12 pt-8 border-t border-neutral-200"
+    >
+      <p>
+        What truly captivates me right now is building
+        self-improving agents and novel cognitive architectures.
+        I'm particularly interested in memory as a symbolic
+        representation of consciousness—where levels of
+        association lead to different sparking intensities. I
+        believe that in memory is where our self lives.
+      </p>
+      <p className="mt-4">
+        Without a strong memory of the past, we wouldn't have a
+        strong sense of identity. Identity is built on our memory.
+        So building novel cognitive architectures that incorporate
+        the neuroscience of how the brain works—understanding how
+        degrees of life as a being begin—is something I'm deeply
+        passionate about. This includes building reasoning models,
+        self-improving agents, and memory architectures aligned
+        with our understanding of the brain.
+      </p>
+    </ContentSection>
+  );
+};-e 
+
+### frontend/src/components/about/IntroSection.tsx ###
+import React from "react";
+
+export const IntroSection: React.FC = () => {
+  return (
+    <section
+      id="intro"
+      className="flex flex-col gap-6 text-black mt-12 mb-16"
+    >
+      <header className="flex flex-col gap-2">
+        <h1 className="text-3xl font-normal lowercase tracking-tight">
+          hi, i'm anudeep
+        </h1>
+        <p className="text-lg text-neutral-600 lowercase italic">
+          engineer, founder, late bloomer
+        </p>
+      </header>
+      <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
+        Introduction
+      </h2>
+      <div className="flex flex-col gap-1 text-sm">
+        <div className="flex items-center rounded-full px-3 py-1">
+          <span className="inline-block bg-black text-white px-3 py-1 rounded-full text-xs font-medium w-16 text-center">
+            current
+          </span>
+          <span className="text-neutral-800 ml-2">
+            building ai agents that actually work
+          </span>
+        </div>
+        <div className="flex items-center rounded-full px-3 py-1">
+          <span className="inline-block bg-black text-white px-3 py-1 rounded-full text-xs font-medium w-16 text-center">
+            prev
+          </span>
+          <span className="text-neutral-800 ml-2">
+            yale mba • apple • two exits • founding engineer
+          </span>
+        </div>
+      </div>
+    </section>
+  );
+};-e 
+
+### frontend/src/components/about/PhilosophySection.tsx ###
+import React from "react";
+import { ContentSection } from "../ContentSection";
+
+export const PhilosophySection: React.FC = () => {
+  return (
+    <ContentSection 
+      id="philosophy" 
+      title="Philosophy"
+      className="shadow-md bg-white rounded-lg p-6 mt-12 pt-8 border-t border-neutral-200"
+    >
+      <p>
+        I believe what we call creativity is a resonance of
+        patterns already present in nature—from the elegant
+        machinery of proteins acting as molecular motors, to their
+        roles in signal transmission and threat detection. Our
+        innovations are echoes of solutions that biology perfected
+        eons ago. But that's the beauty. We're pattern matchers,
+        connection makers, bridge builders between what is and
+        what could be.
+      </p>
+
+      <p className="text-center italic text-neutral-600 my-8 text-lg">
+        {/* <span className="underline decoration-green-600 decoration-3 underline-offset-4">
+          The distance from idea to creation should be zero
+        </span> */}
+      </p>
+
+      <p>
+        These days you'll find me thinking about reinforcement
+        learning, reading molecular biology papers, or building
+        systems that help talented people find opportunities.
+        Still the same person who learned that love is permanent,
+        not passing. Still betting on myself.
+      </p>
+    </ContentSection>
+  );
+};-e 
+
+### frontend/src/components/about/SFJourneySection.tsx ###
+import React from "react";
+import { ContentSection } from "../ContentSection";
+
+export const SFJourneySection: React.FC = () => {
+  return (
+    <ContentSection id="sf-journey" title="San Francisco Journey">
+      <p>
+        <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
+          2017
+        </span>
+        Moved to SF with no job, slept on couches for 9 months.
+        Everyone said "beggars can't be choosers," but I held out
+        for what I wanted. Got it. Worked directly with founders
+        and realized they're just human. Anyone can build
+        something.
+      </p>
+    </ContentSection>
+  );
+};-e 
+
+### frontend/src/components/about/TurningPointSection.tsx ###
+import React from "react";
+import { ContentSection } from "../ContentSection";
+
+export const TurningPointSection: React.FC = () => {
+  return (
+    <ContentSection id="turning-point" title="The Turning Point">
+      <p>
+        <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
+          2021
+        </span>
+        The turning point. Pandemic hit, was deep in educating
+        myself on biology when GPT-3 launched, and I saw
+        transformer architecture mirroring Wernicke's and Broca's
+        areas in the brain.{" "}
+        <span className="underline decoration-green-600 decoration-3 underline-offset-4">
+          Lightning strike of clarity
+        </span>
+        . I exited the company, abandoned all immediate plans to
+        stay in SF, and flew back to India.
+      </p>
+      <p className="text-center italic text-neutral-600 my-8 text-lg">
+        Spent the next four years becoming the person I needed to
+        be
+      </p>
+    </ContentSection>
+  );
+};-e 
+
+### frontend/src/components/about/YaleSection.tsx ###
+import React from "react";
+import { ContentSection } from "../ContentSection";
+
+export const YaleSection: React.FC = () => {
+  return (
+    <ContentSection id="yale" title="Yale & Transformation">
+      <p>
+        At Yale, everything changed. Found a philosophy class that{" "}
+        <span className="underline decoration-green-600 decoration-3 underline-offset-4">
+          rewired how I think.{" "}
+        </span>
+        Spent 9 months forcing my brain to connect every new idea
+        to something I already knew, decomposing thoughts until I
+        hit first principles. Uncomfortable as hell, but it
+        worked. Eventually all knowledge felt
+        interconnected—biology, physics, AI, spirituality,
+        everything resonating across the same trunk of truth.
+      </p>
+      <p>
+        I also interned at Apple, and started a company one after
+        the other. Worked on high-profile projects such as App
+        Store Redesign and Single Sign-On, but still, the fun I
+        had at the startup had my heart. Came back, knew that I
+        wanted to work as a PM at an early-stage startup. It was
+        not an easy decision.
+      </p>
+    </ContentSection>
+  );
+};-e 
+
+### frontend/src/components/about/index.ts ###
+export { IntroSection } from "./IntroSection";
+export { EarlyDaysSection } from "./EarlyDaysSection";
+export { YaleSection } from "./YaleSection";
+export { SFJourneySection } from "./SFJourneySection";
+export { TurningPointSection } from "./TurningPointSection";
+export { BuildingSection } from "./BuildingSection";
+export { PhilosophySection } from "./PhilosophySection";
+export { InterestsSection } from "./InterestsSection";
+export { CurrentSection } from "./CurrentSection";
+export { ContactLinks } from "./ContactLinks";-e 
+
+### frontend/src/hooks/useScrollSpy.ts ###
+import { useEffect, useState } from "react";
+
+export const useScrollSpy = () => {
+  const [activeSection, setActiveSection] = useState<string>("");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll("section[id]");
+      let current = "";
+
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 100 && rect.bottom > 100) {
+          current = section.id;
+        }
+      });
+
+      // If at the bottom of the page, highlight the last section
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 2 // allow for rounding errors
+      ) {
+        const lastSection = sections[sections.length - 1];
+        if (lastSection) {
+          current = lastSection.id;
+        }
+      }
+
+      setActiveSection(current);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return { activeSection, scrollToSection };
+};-e 
+
+### frontend/src/pages/About.tsx ###
+import React from "react";
+import { TableOfContents } from "@/components/TableOfContents";
+import { useScrollSpy } from "@/hooks/useScrollSpy";
+import type { TocItem } from "@/types";
+import {
+  IntroSection,
+  EarlyDaysSection,
+  YaleSection,
+  SFJourneySection,
+  TurningPointSection,
+  BuildingSection,
+  PhilosophySection,
+  InterestsSection,
+  CurrentSection,
+  ContactLinks,
+} from "@/components/about";
+
+const About: React.FC = () => {
+  const { activeSection, scrollToSection } = useScrollSpy();
+
+  const tocItems: TocItem[] = [
+    { id: "intro", label: "Introduction" },
+    { id: "early-days", label: "Early Days" },
+    { id: "yale", label: "Yale & Transformation" },
+    { id: "sf-journey", label: "San Francisco Journey" },
+    { id: "turning-point", label: "The Turning Point" },
+    { id: "building", label: "Building & Learning" },
+    { id: "philosophy", label: "Philosophy" },
+    { id: "interests", label: "Areas of Interest" },
+    { id: "current", label: "Where I Am Now" },
+  ];
+
+  return (
+    <div className="relative w-full max-w-6xl mx-auto px-4 flex gap-8">
+      <TableOfContents
+        items={tocItems}
+        activeSection={activeSection}
+        onSectionClick={scrollToSection}
+      />
+
+      <article className="flex-1 max-w-2xl mx-auto pb-20">
+        <IntroSection />
+
+        <div className="text-base leading-relaxed text-neutral-800 space-y-6">
+          <EarlyDaysSection />
+          <YaleSection />
+          <SFJourneySection />
+          <TurningPointSection />
+          <BuildingSection />
+          <PhilosophySection />
+          <InterestsSection />
+          <CurrentSection />
+          <ContactLinks />
+        </div>
+      </article>
+    </div>
+  );
+};
+
+export default About;-e 
+
+### frontend/src/types/index.ts ###
+export interface TocItem {
+  id: string;
+  label: string;
+}
+
+export interface TableOfContentsProps {
+  items: TocItem[];
+  activeSection: string;
+  onSectionClick: (id: string) => void;
+  className?: string;
+}
+
+export interface ContentSectionProps {
+  id: string;
+  title: string;
+  children: React.ReactNode;
+  className?: string;
+}-e 
+

@@ -17,7 +17,7 @@ const ProfessionalHistory = () => {
   ];
 
   const TimelineConnector = ({ isLast = false }: { isLast?: boolean }) => (
-    <div className="absolute left-8 top-16 w-px bg-gradient-to-b from-neutral-300 via-neutral-200 to-transparent" 
+    <div className="absolute left-4 md:left-8 top-16 w-px bg-gradient-to-b from-neutral-300 via-neutral-200 to-transparent" 
          style={{ 
            height: isLast ? '0' : '120px',
            transform: 'translateX(-0.5px)',
@@ -27,7 +27,7 @@ const ProfessionalHistory = () => {
   );
 
   const TimelineNode = () => (
-    <div className="absolute left-6 top-8 w-4 h-4 bg-white border-2 border-neutral-400 rounded-full shadow-sm" />
+    <div className="absolute left-2 md:left-6 top-8 w-4 h-4 bg-white border-2 border-neutral-400 rounded-full shadow-sm" />
   );
 
   const ExperienceCard = ({ 
@@ -38,6 +38,7 @@ const ProfessionalHistory = () => {
     location, 
     narrative, 
     stack,
+    tldr,
     isLast = false 
   }: { 
     id: string; 
@@ -47,28 +48,39 @@ const ProfessionalHistory = () => {
     location: string; 
     narrative: string; 
     stack?: string;
+    tldr?: string;
     isLast?: boolean;
   }) => (
-    <div className="relative mb-16">
+    <div className="relative mb-12 md:mb-16">
       <TimelineNode />
       <TimelineConnector isLast={isLast} />
       
       <ContentSection
         id={id}
         title=""
-        className="ml-20 bg-white border border-neutral-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-200"
+        className="ml-8 md:ml-20 bg-white border border-neutral-200 rounded-lg p-4 md:p-6 shadow-sm hover:shadow-md transition-shadow duration-200"
       >
         <div className="mb-4">
-          <h3 className="text-xl font-semibold text-neutral-900 mb-1">{company}</h3>
-          <p className="text-neutral-600 text-sm mb-1">{role}</p>
+          <h3 className="text-lg md:text-xl font-semibold text-neutral-900 mb-1">{company}</h3>
+          <p className="text-neutral-600 text-xs md:text-sm mb-1">{role}</p>
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-xs text-neutral-500">
             <span>{period}</span>
             <span className="mt-1 sm:mt-0">{location}</span>
           </div>
         </div>
         
+        {tldr && (
+          <div className="mb-4 md:mb-6 p-3 md:p-4 bg-gradient-to-r from-green-50 to-neutral-50 border-l-4 border-green-500 rounded-r-lg">
+            <div className="flex items-center mb-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+              <span className="text-xs font-semibold text-green-700 uppercase tracking-wide">TL;DR</span>
+            </div>
+            <p className="text-xs md:text-sm font-medium text-neutral-800 leading-relaxed">{tldr}</p>
+          </div>
+        )}
+        
         <div className="prose prose-neutral max-w-none">
-          <p className="text-neutral-700 leading-relaxed whitespace-pre-line">{narrative}</p>
+          <p className="text-xs md:text-sm text-neutral-700 leading-relaxed whitespace-pre-line">{narrative}</p>
         </div>
         
         {stack && (
@@ -84,12 +96,12 @@ const ProfessionalHistory = () => {
   return (
     <div className="min-h-screen bg-neutral-50">
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="flex gap-8">
+        <div className="flex flex-col lg:flex-row gap-8">
           {/* Main Timeline Content */}
           <main className="flex-1">
-            <div className="mb-12">
-              <h1 className="text-3xl font-bold text-neutral-900 mb-4">Professional Journey</h1>
-              <p className="text-neutral-600 leading-relaxed max-w-2xl">
+            <div className="mb-8 md:mb-12">
+              <h1 className="text-2xl md:text-3xl font-bold text-neutral-900 mb-4">Professional Journey</h1>
+              <p className="text-neutral-600 leading-relaxed max-w-2xl text-sm md:text-base">
                 A timeline of experiences that shaped my path through technology, entrepreneurship, and product development. 
                 Each chapter represents not just professional growth, but the evolution of ideas and the connections between them.
               </p>
@@ -102,6 +114,7 @@ const ProfessionalHistory = () => {
                 role="Co-Founder, Product and Engineering Lead"
                 period="Jun 2024 – May 2025"
                 location="San Francisco, CA"
+                tldr="Built AI recruiting platform with multi-agent architecture. Processed 500+ resumes in <20s, conducted 1,000+ voice interviews with fraud prevention. Full-stack TypeScript/Python, real-time WebSocket systems, neural matching engine. Strategic exit after market validation."
                 narrative={`At Reqpal, I architected an AI-driven recruiting platform that reimagined how companies could build custom recruiters. The vision was ambitious: enable organizations to configure their own hiring agents with custom prompts, rubrics, and decision rules that could evolve through real-time conversation trees.
 
 The technical foundation rested on an event-driven multi-agent architecture, with WebSocket-based interview systems enabling seamless real-time interactions. I built a neural matching engine that could process and rank over 500 resumes in under 20 seconds using structured extraction and multi-parameter scoring—a critical breakthrough for scalable talent assessment.
@@ -120,6 +133,7 @@ After six months of intense development and market validation, we made the strat
                 role="Founding Engineer, Product Lead"
                 period="Apr 2023 – May 2024"
                 location="Remote"
+                tldr="Built text-to-animation platform pre-Sora. Natural language → Unity code transpilation, Stable Diffusion + LoRA fine-tuning, web-deployed Unity engine. Full AI pipeline: script parsing, character generation, voice synthesis, video processing. Pub-sub architecture, RunPod/Modal orchestration."
                 narrative={`Rifflix emerged from a fascinating technical challenge: solving video generation controllability in the early diffusion model era. While everyone was chasing generative video, we took a different path—building a text-to-animation platform using Unity's game engine.
 
 I architected a natural language transpilation engine that felt almost magical in use. Through context-free grammar and function calling, we could extract entities from user scripts and convert plain English into Unity code that controlled character movement, camera angles, and lighting. Users could write "The character walks to the door and turns on the light" and watch it happen.
@@ -138,6 +152,7 @@ The architecture's elegance lay in its publisher-subscriber queue system, enabli
                 role="Founder & Applied AI Engineer"
                 period="Jan 2021 – Dec 2022"
                 location="San Francisco, CA → Bengaluru, India"
+                tldr="Built full RAG system 2 years before ChatGPT. Embedding-based semantic search, knowledge graphs with Neo4j, automated metadata extraction (TF-IDF, NLP). Shipped Chrome extension + iOS app. Self-taught Python/spaCy/NLP in 3 months, immediately deployed to production."
                 narrative={`Sidebrain was born from a prescient thesis: that knowledge retrieval and exploration would fundamentally shift to conversation-driven interactions. This was 2021, well before ChatGPT made conversational AI mainstream, yet we were building what would later be recognized as a complete RAG (Retrieval-Augmented Generation) system.
 
 I architected the entire system from scratch, implementing embedding-based semantic search with cosine similarity, intelligent document chunking, and context-aware response generation. The technical foundation required deep understanding of how human knowledge could be computationally indexed and retrieved through natural conversation.
@@ -158,6 +173,7 @@ This journey required intense self-teaching—I absorbed Python, spaCy, and NLP 
                 role="Senior Product Manager (Acting Director of Product)"
                 period="2019 – 2021"
                 location="San Francisco, CA"
+                tldr="Series D fintech ($580M funding), unbanked lending platform. Built OCR + human-in-loop document verification, fraud detection systems. Retained through 80% layoffs. Led CARES Act SMB emergency funding infrastructure. Consumer credit platform with personalized offers."
                 narrative={`At Aura, a Series D fintech with $580M in funding, I led consumer products and backend systems focused on providing credit access to unbanked populations—a mission that combined technical innovation with social impact.
 
 Before AI-powered document processing became standard, I built and deployed OCR systems combined with human-in-the-loop workflows for document verification. Working closely with operations teams, we automated data labeling, parsing, and fraud detection, dramatically reducing processing times while improving conversion rates.
@@ -175,6 +191,7 @@ This experience taught me how product leadership in fintech requires balancing r
                 role="Product Manager"
                 period="2017 – 2019"
                 location="San Francisco, CA"
+                tldr="Insurtech acquired by Credit Karma ($88M raised). Behavior-based auto insurance pricing using 150B+ miles driving data. ML collision detection, real-time risk assessment, sensor data analytics. iOS/Android apps for seamless data collection. Pre-telematics mainstream adoption."
                 narrative={`Zendrive, later acquired by CreditKarma after raising $88M, was pioneering insurtech focused on behavior-based insurance pricing—a concept that seems obvious now but was revolutionary then.
 
 I led the consumer experience for an auto insurance platform that priced policies based on actual driver behavior rather than demographic proxies. This required building iOS and Android applications that could seamlessly collect and analyze driving patterns while maintaining user trust and engagement.
@@ -192,6 +209,7 @@ This experience showed me how data-driven products could transform entire indust
                 role="Foundation Years"
                 period="2011 – 2017"
                 location="New Haven, CT & India"
+                tldr="Yale MBA (tech/entrepreneurship focus), Apple intern (SSO, App Store redesign). Built healthtech for malaria adherence in Sierra Leone. CS foundation: algorithms, data structures, C++. Early product experience reaching billions of users."
                 narrative={`My educational journey laid the technical and philosophical foundation for everything that followed.
 
 At Yale's MBA program, I focused on the intersection of technology, entrepreneurship, and philosophy—a combination that shaped my approach to building products that matter. During this time, I interned at Apple, contributing to the launch of Apple Single Sign-On and the iOS App Store redesign, experiencing firsthand how thoughtful design and technical excellence could reach billions of users.
@@ -206,12 +224,14 @@ This educational foundation taught me that technology's true power lies not in i
             </div>
           </main>
 
-          {/* Table of Contents */}
-          <TableOfContents
-            items={tocItems}
-            activeSection={activeSection}
-            onSectionClick={scrollToSection}
-          />
+          {/* Table of Contents - Hidden on mobile, shown on large screens */}
+          <div className="lg:block">
+            <TableOfContents
+              items={tocItems}
+              activeSection={activeSection}
+              onSectionClick={scrollToSection}
+            />
+          </div>
         </div>
       </div>
     </div>
