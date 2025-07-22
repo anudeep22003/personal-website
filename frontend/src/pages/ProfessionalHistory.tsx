@@ -112,7 +112,14 @@ const ProfessionalHistory = () => {
   return (
     <div className="min-h-screen bg-neutral-50">
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col gap-8 lg:flex-row">
+          {/* Table of Contents: mobile (top) and desktop (sidebar) */}
+          <TableOfContents
+            items={tocItems}
+            activeSection={activeSection}
+            onSectionClick={scrollToSection}
+          />
+
           {/* Main Timeline Content */}
           <main className="flex-1">
             <div className="mb-8 md:mb-12">
@@ -238,15 +245,6 @@ This foundation taught me that technology's power lies in solving meaningful hum
               />
             </div>
           </main>
-
-          {/* Table of Contents - Hidden on mobile, shown on large screens */}
-          <div className="lg:block">
-            <TableOfContents
-              items={tocItems}
-              activeSection={activeSection}
-              onSectionClick={scrollToSection}
-            />
-          </div>
         </div>
       </div>
     </div>

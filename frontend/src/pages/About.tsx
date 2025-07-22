@@ -31,12 +31,15 @@ const About: React.FC = () => {
   ];
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto px-4 flex gap-8">
-      <TableOfContents
-        items={tocItems}
-        activeSection={activeSection}
-        onSectionClick={scrollToSection}
-      />
+    <div className="relative w-full max-w-6xl mx-auto px-4 flex flex-col gap-8 lg:flex-row">
+      {/* Table of Contents: mobile (top) and desktop (sidebar) */}
+      <div className="mt-8 lg:mt-20">
+        <TableOfContents
+          items={tocItems}
+          activeSection={activeSection}
+          onSectionClick={scrollToSection}
+        />
+      </div>
 
       <article className="flex-1 max-w-2xl mx-auto pb-20">
         <IntroSection />
