@@ -287,9 +287,9 @@ const About: React.FC = () => {
             </p>
 
             <p className="text-center italic text-neutral-600 my-8 text-lg">
-              <span className="underline decoration-green-600 decoration-3 underline-offset-4">
+              {/* <span className="underline decoration-green-600 decoration-3 underline-offset-4">
                 The distance from idea to creation should be zero
-              </span>
+              </span> */}
             </p>
 
             <p>
