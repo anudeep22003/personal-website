@@ -96,17 +96,17 @@ const About: React.FC = () => {
             Introduction
           </h2>
           <div className="flex flex-col gap-1 text-sm">
-            <div>
-              <span className="inline-block bg-black text-white px-3 py-1 rounded-full text-xs font-medium">
+            <div className="flex items-center rounded-full px-3 py-1">
+              <span className="inline-block bg-black text-white px-3 py-1 rounded-full text-xs font-medium w-16 text-center">
                 current
               </span>
               <span className="text-neutral-800 ml-2">
                 building ai agents that actually work
               </span>
             </div>
-            <div>
-              <span className="inline-block bg-black text-white px-3 py-1 rounded-full text-xs font-medium">
-                ex
+            <div className="flex items-center rounded-full px-3 py-1">
+              <span className="inline-block bg-black text-white px-3 py-1 rounded-full text-xs font-medium w-16 text-center">
+                prev
               </span>
               <span className="text-neutral-800 ml-2">
                 yale mba • apple • two exits • founding engineer

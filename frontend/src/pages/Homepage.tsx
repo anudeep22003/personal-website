@@ -36,61 +36,133 @@ const Homepage: React.FC = () => {
           <span className="inline-block bg-black text-white px-3 py-1.5 rounded-full text-xs font-medium">
             now
           </span>
-          <span className="text-neutral-700">
+          <span className="text-neutral-600">
             multi-agent systems • semantic interfaces • ai that learns
           </span>
         </div>
 
         {/* before */}
         <div className="flex flex-wrap items-center gap-2 mb-6 text-sm">
-          <span className="inline-block bg-neutral-100 text-neutral-800 px-2 py-1 rounded-full text-xs font-medium border border-neutral-300">
+          <span className="inline-block bg-neutral-100 text-neutral-600 px-2 py-1 rounded-full text-xs font-medium border border-neutral-300">
             before
           </span>
-          <span className="text-neutral-700">
+          <span className="text-neutral-600">
             yale • apple • computer science • product management • two
             exits
           </span>
         </div>
 
-        <div className="text-base leading-relaxed text-neutral-800 space-y-4">
-          <p>
-            i'm fascinated by the intersection of human creativity and
-            machine intelligence. somewhere between rejections and
-            revelations, i learned to see algorithms as poetry.
-          </p>
+        <div className="text-base leading-relaxed text-neutral-600 space-y-6">
+          {/* Who am I */}
+          <div>
+            <h2 className="text-lg font-semibold text-neutral-900 mb-1 lowercase">
+              who am i
+            </h2>
+            <p>
+              I’m an engineer, founder, and late bloomer—drawn to the
+              intersection of human creativity and machine intelligence.
+              My journey has taken me from product management to
+              building systems that feel alive, where the whole becomes
+              greater than the sum of its parts. I believe that{" "}
+              <span className="font-medium text-green-600">
+                creativity is a resonance of patterns
+              </span>{" "}
+              already present in nature, and I’m always seeking to{" "}
+              <span className="font-medium text-green-600">
+                bridge what is with what could be
+              </span>
+              .
+            </p>
+          </div>
 
-          <p>
-            i love building systems that feel alive—where the whole
-            becomes greater than the sum of its parts. the universe
-            doesn't care about cool ideas, only whether they solve real
-            problems.
-          </p>
+          {/* What am I good at */}
+          <div className="gap-2 flex flex-col">
+            <h2 className="text-lg font-semibold text-neutral-900 mb-1 lowercase">
+              what am i good at
+            </h2>
+            <p>
+              I thrive at{" "}
+              <span className="font-medium text-green-600">
+                decomposing complex problems
+              </span>{" "}
+              to first principles and building from the ground up. My
+              strengths lie in{" "}
+              <span className="font-medium text-green-600">
+                systems thinking
+              </span>
+              , product intuition, and technical depth—whether it’s
+              designing AI architectures, launching ventures, or
+              connecting ideas across disciplines. I’ve learned that the
+              best products emerge from the{" "}
+              <span className="font-medium text-green-600">
+                intersection of human insight and technical possibility
+              </span>
+              .
+            </p>
+            <p>
+              The biggest unlock for me was{" "}
+              <span className="font-medium text-green-600">
+                learning from AI itself
+              </span>
+              —now, I can teach myself anything fast. I build on a
+              foundation of computer science, biology, and physics, and
+              I’m always ready to{" "}
+              <span className="font-medium text-green-600">
+                dive deep
+              </span>
+              , adapt, and{" "}
+              <span className="font-medium text-green-600">
+                learn what’s next
+              </span>
+              .
+            </p>
+          </div>
 
-          <p>
-            my journey started in product management, but i felt drawn
-            to deeper technical challenges. i taught myself to build,
-            launched ventures, and learned that the best products emerge
-            from the intersection of human insight and technical
-            possibility.
-          </p>
+          {/* What interests me */}
+          <div>
+            <h2 className="text-lg font-semibold text-neutral-900 mb-1 lowercase">
+              what interests me
+            </h2>
+            <p>
+              I’m fascinated by{" "}
+              <span className="font-medium text-green-600">
+                self-improving agents
+              </span>
+              , memory as the root of identity, and{" "}
+              <span className="font-medium text-green-600">
+                emergent behavior
+              </span>{" "}
+              in organic and artificial systems. My current focus is on
+              building{" "}
+              <span className="font-medium text-green-600">
+                autonomous AI agents
+              </span>{" "}
+              and novel cognitive architectures inspired by
+              biology—systems that help talented people{" "}
+              <span className="font-medium text-green-600">
+                unlock their potential
+              </span>
+              .
+            </p>
+          </div>
         </div>
 
         {/* Interests and approach section */}
         <div className="mt-8 pt-6 border-t border-neutral-200 space-y-4">
           <div className="flex flex-wrap items-center gap-2 text-sm">
-            <span className="inline-block bg-neutral-100 text-neutral-700 px-2 py-1 rounded-full text-xs font-medium border border-neutral-300">
+            <span className="inline-block bg-neutral-100 text-neutral-600 px-2 py-1 rounded-full text-xs font-medium border border-neutral-300">
               interests
             </span>
-            <span className="text-neutral-700">
+            <span className="text-neutral-600">
               human potential • systems thinking • emergent behavior
             </span>
           </div>
 
           <div className="flex flex-wrap items-center gap-2 text-sm">
-            <span className="inline-block bg-neutral-100 text-neutral-700 px-2 py-1 rounded-full text-xs font-medium border border-neutral-300">
+            <span className="inline-block bg-neutral-100 text-neutral-600 px-2 py-1 rounded-full text-xs font-medium border border-neutral-300">
               approach
             </span>
-            <span className="text-neutral-700">
+            <span className="text-neutral-600">
               code as poetry • functional art • organic systems •
               biology
             </span>
@@ -109,7 +181,7 @@ const Homepage: React.FC = () => {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-green-600 hover:text-green-700 underline underline-offset-2 text-sm lowercase transition-colors hover:bg-green-50 px-2 py-1 rounded"
+                className="text-green-600 hover:text-green-600 underline underline-offset-2 text-sm lowercase transition-colors hover:bg-green-50 px-2 py-1 rounded"
               >
                 {link.label}
               </a>
@@ -124,7 +196,7 @@ const Homepage: React.FC = () => {
               href="/resume"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2 text-neutral-700 hover:text-green-600 text-base lowercase transition-colors"
+              className="group flex items-center gap-2 text-neutral-600 hover:text-green-600 text-base lowercase transition-colors"
             >
               <span className="underline underline-offset-2">
                 see my resume
