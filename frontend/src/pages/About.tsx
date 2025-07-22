@@ -1,5 +1,5 @@
 import React from "react";
-import { TableOfContents } from "@/components/TableOfContents";
+import { ScrollToTopButton, TableOfContents } from "@/components/TableOfContents";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
 import type { TocItem } from "@/types";
 import {
@@ -56,6 +56,7 @@ const About: React.FC = () => {
           <ContactLinks />
         </div>
       </article>
+      <ScrollToTopButton />
     </div>
   );
 };

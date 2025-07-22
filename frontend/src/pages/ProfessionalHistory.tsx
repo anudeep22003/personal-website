@@ -1,4 +1,7 @@
-import { TableOfContents } from "@/components/TableOfContents";
+import {
+  ScrollToTopButton,
+  TableOfContents,
+} from "@/components/TableOfContents";
 import { ContentSection } from "@/components/ContentSection";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
 import type { TocItem } from "@/types";
@@ -247,6 +250,7 @@ This foundation taught me that technology's power lies in solving meaningful hum
           </main>
         </div>
       </div>
+      <ScrollToTopButton />
     </div>
   );
 };

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import type { TableOfContentsProps } from "@/types";
+import { Button } from "@/components/ui/button";
+import { ChevronUp } from "lucide-react"; // or your preferred icon
 
 export const TableOfContents: React.FC<TableOfContentsProps> = ({
   items,
@@ -67,5 +69,46 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
         </nav>
       </aside>
     </>
+  );
+};
+
+interface ScrollToTopButtonProps {
+  threshold?: number; // px, default: 2.5 * window.innerHeight
+  className?: string;
+}
+
+export const ScrollToTopButton: React.FC<ScrollToTopButtonProps> = ({
+  threshold,
+  className = "",
+}) => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY || window.pageYOffset;
+      const defaultThreshold = 2.5 * window.innerHeight;
+      setVisible(scrollY > (threshold ?? defaultThreshold));
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [threshold]);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  if (!visible) return null;
+
+  return (
+    <Button
+      onClick={scrollToTop}
+      variant="secondary"
+      size="icon"
+      className={`fixed bottom-12 right-6 z-50 rounded-full shadow-lg bg-slate-900 text-white ${className}`}
+      aria-label="Scroll to top"
+    >
+      <ChevronUp className="w-5 h-5" />
+    </Button>
   );
 };
