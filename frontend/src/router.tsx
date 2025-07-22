@@ -22,7 +22,7 @@ export const routes = [
         element: <AboutPage />,
       },
       {
-        path: "/professional-history",
+        path: "/history",
         element: <ProfessionalHistory />,
       },
     ],
