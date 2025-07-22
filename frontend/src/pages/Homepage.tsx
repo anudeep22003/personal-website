@@ -3,27 +3,22 @@ import React from "react";
 const socialLinks = [
   {
     label: "linkedin",
-    url: "https://www.linkedin.com/in/anudeep-yegireddi/",
+    url: "https://www.linkedin.com/in/anudeepyegireddi/",
   },
-  { label: "github", url: "https://github.com/anudeep-yegireddi" },
-  { label: "twitter", url: "https://x.com/anudeep_yegireddi" },
+  { label: "github", url: "https://github.com/anudeep22003" },
+  { label: "twitter", url: "https://twitter.com/anudeepy_" },
   {
-    label: "instagram",
-    url: "https://www.instagram.com/anudeep_yegireddi/",
+    label: "blog",
+    url: "https://anudeep.posthaven.com/archive",
   },
-  {
-    label: "youtube",
-    url: "https://www.youtube.com/@anudeep_yegireddi",
-  },
-  { label: "tiktok", url: "https://www.tiktok.com/@anudeep_yegireddi" },
 ];
 
 const Homepage: React.FC = () => {
   return (
     <section className="w-full max-w-2xl mx-auto px-4 flex flex-col gap-6 text-black m-4">
-      {/* Elegant background treatment */}
-      <div className="absolute inset-0 bg-gradient-to-br from-neutral-50 via-white to-neutral-100 -z-10 rounded-lg opacity-60" />
-      <div className="relative border border-neutral-200/50 rounded-lg p-6 bg-white/80 backdrop-blur-sm shadow-sm">
+      {/* Enhanced elegant background treatment */}
+      <div className="absolute inset-0 bg-gradient-to-br from-neutral-50 via-white to-neutral-100 -z-10 rounded-lg opacity-70" />
+      <div className="relative border border-neutral-200/60 rounded-lg p-6 bg-white/85 backdrop-blur-sm shadow-sm ring-1 ring-neutral-100/80">
         <header className="flex flex-col gap-3 mt-4 mb-6">
           <div className="flex items-center gap-3">
             <h1 className="text-2xl font-normal lowercase tracking-tight">
@@ -36,57 +31,73 @@ const Homepage: React.FC = () => {
           </p>
         </header>
 
-        {/* Badge layer - current status */}
-        <div className="flex flex-wrap items-center gap-2 mb-6 text-sm">
-          <span className="inline-block bg-black text-white px-3 py-1 rounded-full text-xs font-medium">
-            building
+        {/* now */}
+        <div className="flex flex-wrap items-center gap-2 mb-4 text-sm">
+          <span className="inline-block bg-black text-white px-3 py-1.5 rounded-full text-xs font-medium">
+            now
           </span>
           <span className="text-neutral-700">
-            ai agents that actually work •
-          </span>
-          <span className="inline-block bg-neutral-800 text-white px-2 py-0.5 rounded text-xs">
-            open to inquiries
+            multi-agent systems • semantic interfaces • ai that learns
           </span>
         </div>
 
-        {/* Badge layer - experience */}
+        {/* before */}
         <div className="flex flex-wrap items-center gap-2 mb-6 text-sm">
-          <span className="inline-block bg-neutral-100 text-neutral-800 px-2 py-1 rounded-full text-xs border border-neutral-300">
-            ex
+          <span className="inline-block bg-neutral-100 text-neutral-800 px-2 py-1 rounded-full text-xs font-medium border border-neutral-300">
+            before
           </span>
           <span className="text-neutral-700">
-            yale mba • apple • two exits
+            yale • apple • computer science • product management • two
+            exits
           </span>
         </div>
 
         <div className="text-base leading-relaxed text-neutral-800 space-y-4">
           <p>
-            i'm a{" "}
-            <span className="bg-neutral-100 px-1 py-0.5 rounded font-medium">
-              romantic about human potential
-            </span>
-            . went from pm dreaming in india to founding engineer in san
-            francisco. somewhere between rejections and revelations,
-            taught myself to see{" "}
-            <span className="bg-neutral-100 px-1 py-0.5 rounded font-medium">
-              biology as the ultimate algorithm
-            </span>
-            .
+            i'm fascinated by the intersection of human creativity and
+            machine intelligence. somewhere between rejections and
+            revelations, i learned to see algorithms as poetry.
           </p>
 
           <p>
-            built sidebrain (pre-chatgpt rag), rifflix
-            (text-to-animation), reqpal (ai recruiting). learned that
-            the universe doesn't care about cool ideas—only whether they
-            solve real problems. these days i treat{" "}
-            <span className="bg-neutral-100 px-1 py-0.5 rounded font-medium">
-              code like functional art
-            </span>
-            .
+            i love building systems that feel alive—where the whole
+            becomes greater than the sum of its parts. the universe
+            doesn't care about cool ideas, only whether they solve real
+            problems.
+          </p>
+
+          <p>
+            my journey started in product management, but i felt drawn
+            to deeper technical challenges. i taught myself to build,
+            launched ventures, and learned that the best products emerge
+            from the intersection of human insight and technical
+            possibility.
           </p>
         </div>
 
-        {/* Social links with refined styling */}
+        {/* Interests and approach section */}
+        <div className="mt-8 pt-6 border-t border-neutral-200 space-y-4">
+          <div className="flex flex-wrap items-center gap-2 text-sm">
+            <span className="inline-block bg-neutral-100 text-neutral-700 px-2 py-1 rounded-full text-xs font-medium border border-neutral-300">
+              interests
+            </span>
+            <span className="text-neutral-700">
+              human potential • systems thinking • emergent behavior
+            </span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2 text-sm">
+            <span className="inline-block bg-neutral-100 text-neutral-700 px-2 py-1 rounded-full text-xs font-medium border border-neutral-300">
+              approach
+            </span>
+            <span className="text-neutral-700">
+              code as poetry • functional art • organic systems •
+              biology
+            </span>
+          </div>
+        </div>
+
+        {/* Social links */}
         <div className="flex flex-col gap-3 mt-8 pt-6 border-t border-neutral-200">
           <span className="text-neutral-500 text-sm lowercase">
             find me here
@@ -98,7 +109,7 @@ const Homepage: React.FC = () => {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-neutral-700 hover:text-black underline underline-offset-2 text-sm lowercase transition-colors hover:bg-neutral-50 px-2 py-1 rounded"
+                className="text-green-600 hover:text-green-700 underline underline-offset-2 text-sm lowercase transition-colors hover:bg-green-50 px-2 py-1 rounded"
               >
                 {link.label}
               </a>
@@ -106,43 +117,14 @@ const Homepage: React.FC = () => {
           </nav>
         </div>
 
-        {/* Current stage section with enhanced badge styling */}
-        <section className="mt-8 pt-6 border-t border-neutral-200">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="inline-block bg-black text-white px-3 py-1 rounded-full text-xs font-medium">
-              current stage
-            </span>
-            <div className="flex-1 h-px bg-gradient-to-r from-neutral-300 to-transparent" />
-          </div>
-
-          <div className="text-base text-neutral-800 leading-relaxed space-y-4">
-            <p>
-              i used to work as a pm across fintech, insurtech,
-              consumer, and saas. then i quit, trained as an engineer,
-              taught myself ai full time, launched a couple of startups,
-              and exited them. i now identify as an engineer with deep
-              product understanding.
-            </p>
-
-            <div className="bg-neutral-50 border-l-4 border-neutral-400 pl-4 py-3 italic text-neutral-700">
-              <p>
-                i'm looking to join companies solving hard technical
-                problems that need out-of-the-box thinking across
-                product and engineering. i build full stack multimodal
-                ai products with agents that learn.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Resume link with enhanced styling */}
+        {/* Resume link */}
         <div className="mt-8 pt-6 border-t border-neutral-200">
           <div className="flex items-center justify-between">
             <a
-              href="/resume.pdf"
+              href="/resume"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2 text-neutral-700 hover:text-black text-base lowercase transition-colors"
+              className="group flex items-center gap-2 text-neutral-700 hover:text-green-600 text-base lowercase transition-colors"
             >
               <span className="underline underline-offset-2">
                 see my resume
@@ -151,7 +133,7 @@ const Homepage: React.FC = () => {
                 →
               </span>
             </a>
-            <span className="inline-block bg-neutral-200 text-neutral-600 px-2 py-1 rounded-full text-xs">
+            <span className="inline-block bg-gradient-to-r from-neutral-200 to-neutral-300 text-neutral-600 px-2 py-1 rounded-full text-xs">
               pdf
             </span>
           </div>
