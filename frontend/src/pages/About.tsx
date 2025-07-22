@@ -15,6 +15,17 @@ const About: React.FC = () => {
         }
       });
 
+      // If at the bottom of the page, highlight the last section
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 2 // allow for rounding errors
+      ) {
+        const lastSection = sections[sections.length - 1];
+        if (lastSection) {
+          current = lastSection.id;
+        }
+      }
+
       setActiveSection(current);
     };
 
@@ -81,37 +92,53 @@ const About: React.FC = () => {
               engineer, founder, late bloomer
             </p>
           </header>
-
-          <div className="flex flex-wrap items-center gap-2 text-sm">
-            <span className="inline-block bg-black text-white px-3 py-1 rounded-full text-xs font-medium">
-              current
-            </span>
-            <span className="text-neutral-800">
-              building ai agents that actually work •
-            </span>
-            <span className="inline-block bg-black text-white px-3 py-1 rounded-full text-xs font-medium">
-              ex
-            </span>
-            <span className="text-neutral-800">
-              yale mba • apple • two exits • founding engineer
-            </span>
+          <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
+            Introduction
+          </h2>
+          <div className="flex flex-col gap-1 text-sm">
+            <div>
+              <span className="inline-block bg-black text-white px-3 py-1 rounded-full text-xs font-medium">
+                current
+              </span>
+              <span className="text-neutral-800 ml-2">
+                building ai agents that actually work
+              </span>
+            </div>
+            <div>
+              <span className="inline-block bg-black text-white px-3 py-1 rounded-full text-xs font-medium">
+                ex
+              </span>
+              <span className="text-neutral-800 ml-2">
+                yale mba • apple • two exits • founding engineer
+              </span>
+            </div>
           </div>
         </section>
 
         <div className="text-base leading-relaxed text-neutral-800 space-y-6">
-          <section id="early-days">
+          {/* 2014 Section */}
+          <section
+            id="early-days"
+            className="shadow-md bg-white rounded-lg p-6"
+          >
+            <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
+              Early Days
+            </h2>
             <p>
-              I'm a{" "}
-              <span className="bg-green-50 text-green-900 px-1.5 py-0.5 rounded font-medium">
-                romantic about human potential
+              <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
+                pre 2014
               </span>
-              . Grew up moving around a lot, which made my education
-              piecemeal—always catching up, never quite complete. Wasn't
-              the math olympiad kid or the coding prodigy. Just someone
-              who learned early that new ideas only stick when you
-              connect them to what you already know.
+              Grew up moving around a lot, switching curriculums and
+              schools. Read a lot, participated in quizzes. Once, Dad
+              bought me a microscope from a work trip to Germany and I
+              brought it to school and set up samples, showing all my
+              friends what blood, skin, and hair look like at the
+              microscopic level. I was confident but undirected. In
+              engineering, I studied computer science but yearned to be
+              a mechanical engineer. I reluctantly accepted CS. Tried
+              running away from tech by doing consulting, but slowly and
+              surely I found my own way back to tech.
             </p>
-
             <p>
               <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
                 2014
@@ -123,76 +150,111 @@ const About: React.FC = () => {
             </p>
           </section>
 
-          <section id="yale">
+          {/* Yale Section */}
+          <section
+            id="yale"
+            className="shadow-md bg-white rounded-lg p-6"
+          >
+            <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
+              Yale & Transformation
+            </h2>
             <p>
               At Yale, everything changed. Found a philosophy class that{" "}
-              <span className="bg-green-100 text-green-900 px-1.5 py-0.5 rounded font-medium">
-                rewired how I think
+              <span className="underline decoration-green-600 decoration-3 underline-offset-4">
+                rewired how I think.{" "}
               </span>
-              . Spent 9 months forcing my brain to connect every new
-              idea to something I already knew, decomposing thoughts
-              until I hit first principles. Uncomfortable as hell, but
-              it worked. Suddenly all knowledge felt
+              Spent 9 months forcing my brain to connect every new idea
+              to something I already knew, decomposing thoughts until I
+              hit first principles. Uncomfortable as hell, but it
+              worked. Eventually all knowledge felt
               interconnected—biology, physics, AI, spirituality,
               everything resonating across the same trunk of truth.
             </p>
+            <p>
+              I also interned at Apple, and started a company one after
+              the other. Worked on high-profile projects such as App
+              Store Redesign and Single Sign-On, but still, the fun I
+              had at the startup had my heart. Came back, knew that I
+              wanted to work as a PM at an early-stage startup. It was
+              not an easy decision.
+            </p>
           </section>
 
-          <section id="sf-journey">
+          {/* 2017 Section */}
+          <section
+            id="sf-journey"
+            className="shadow-md bg-white rounded-lg p-6"
+          >
+            <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
+              San Francisco Journey
+            </h2>
             <p>
               <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
                 2017
               </span>
               Moved to SF with no job, slept on couches for 9 months.
               Everyone said "beggars can't be choosers," but I held out
-              for what I wanted: PM at an early-stage startup. Got it.
-              Worked directly with founders, realized they're just
-              human. Anyone can build something.
+              for what I wanted. Got it. Worked directly with founders
+              and realized they're just human. Anyone can build
+              something.
             </p>
           </section>
 
-          <section id="turning-point">
+          {/* 2021 Section */}
+          <section
+            id="turning-point"
+            className="shadow-md bg-white rounded-lg p-6"
+          >
+            <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
+              The Turning Point
+            </h2>
             <p>
               <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
                 2021
               </span>
-              The turning point. Pandemic hit, GPT-3 launched, and I saw
-              transformer architecture mirroring Wernicke's and Broca's
+              The turning point. Pandemic hit, was deep in educating
+              myself on biology when GPT-3 launched, and I saw
+              transformer architecture mirroring Wernicke’s and Broca’s
               areas in the brain.{" "}
-              <span className="bg-green-200 text-green-900 px-1.5 py-0.5 rounded font-medium">
+              <span className="underline decoration-green-600 decoration-3 underline-offset-4">
                 Lightning strike of clarity
               </span>
-              . Within a week, abandoned my $300k salary and flew back
-              to India.
+              . I exited the company, abandoned all immediate plans to
+              stay in SF, and flew back to India.
             </p>
-
             <p className="text-center italic text-neutral-600 my-8 text-lg">
               Spent the next four years becoming the person I needed to
               be
             </p>
           </section>
 
-          <section id="building">
+          {/* Now Section */}
+          <section
+            id="building"
+            className="shadow-md bg-white rounded-lg p-6"
+          >
+            <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
+              Building & Learning
+            </h2>
             <p>
               Taught myself programming, AI, mathematics. Built
               SideBrain (pre-ChatGPT RAG system), Rifflix
-              (text-to-animation), ReqPal (AI recruiting). Learned that
-              the universe doesn't care about your cool ideas —only
+              (text-to-animation), and ReqPal (AI recruiting). Learned
+              that the universe doesn't care about your cool ideas—only
               whether they solve real problems. Shut down what didn't
               work. Kept what did.
             </p>
-
             <p>
-              Somewhere along the way, fell deeply in love with{" "}
-              <span className="bg-green-100 text-green-900 px-1.5 py-0.5 rounded font-medium">
-                biology as the ultimate algorithm
+              Somewhere along the way, found my muse in biology, when I
+              realized{" "}
+              <span className="underline decoration-green-600 decoration-3 underline-offset-4">
+                evolution is the ultimate algorithm
               </span>
-              . Evolution creates order despite entropy—three and a half
-              billion years of pattern reinforcement. When I get stuck
-              on technical problems, I look to biology. It never fails
-              me.
+              . Evolution creates order despite entropy, three and a
+              half billion years of pattern reinforcement. When I get
+              stuck on technical problems, I look to biology—it never
+              fails me.
             </p>
-
             <p>
               <span className="inline-block bg-neutral-800 text-white px-2 py-1 rounded-full text-xs font-semibold mr-2">
                 now
@@ -206,17 +268,26 @@ const About: React.FC = () => {
             </p>
           </section>
 
-          <section id="philosophy">
+          <section
+            id="philosophy"
+            className="shadow-md bg-white rounded-lg p-6 mt-12 pt-8 border-t border-neutral-200"
+          >
+            <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
+              Philosophy
+            </h2>
             <p>
-              I believe human beings can't create truly innovative
-              thoughts —everything we build is analogous to something
-              that already exists. But that's the beauty. We're pattern
-              matchers, connection makers, bridge builders between what
-              is and what could be.
+              I believe what we call creativity is a resonance of
+              patterns already present in nature—from the elegant
+              machinery of proteins acting as molecular motors, to their
+              roles in signal transmission and threat detection. Our
+              innovations are echoes of solutions that biology perfected
+              eons ago. But that's the beauty. We're pattern matchers,
+              connection makers, bridge builders between what is and
+              what could be.
             </p>
 
             <p className="text-center italic text-neutral-600 my-8 text-lg">
-              <span className="bg-green-50 px-2 py-1 rounded">
+              <span className="underline decoration-green-600 decoration-3 underline-offset-4">
                 The distance from idea to creation should be zero
               </span>
             </p>
@@ -226,20 +297,20 @@ const About: React.FC = () => {
               learning, reading molecular biology papers, or building
               systems that help talented people find opportunities.
               Still the same person who learned that love is permanent,
-              not passing . Still betting on myself.
+              not passing. Still betting on myself.
             </p>
           </section>
 
           <section
             id="interests"
-            className="mt-12 pt-8 border-t border-neutral-200"
+            className="shadow-md bg-white rounded-lg p-6 mt-12 pt-8 border-t border-neutral-200"
           >
             <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
               Areas of Interest
             </h2>
             <p>
               What truly captivates me right now is building
-              self-improving agents and novel cognitive architectures .
+              self-improving agents and novel cognitive architectures.
               I'm particularly interested in memory as a symbolic
               representation of consciousness—where levels of
               association lead to different sparking intensities. I
@@ -249,7 +320,7 @@ const About: React.FC = () => {
               Without a strong memory of the past, we wouldn't have a
               strong sense of identity. Identity is built on our memory.
               So building novel cognitive architectures that incorporate
-              the neuroscience of how the brain works —understanding how
+              the neuroscience of how the brain works—understanding how
               degrees of life as a being begin—is something I'm deeply
               passionate about. This includes building reasoning models,
               self-improving agents, and memory architectures aligned
@@ -259,7 +330,7 @@ const About: React.FC = () => {
 
           <section
             id="current"
-            className="mt-12 pt-8 border-t border-neutral-200"
+            className="shadow-md bg-white rounded-lg p-6 mt-12 pt-8 border-t border-neutral-200"
           >
             <h2 className="text-2xl font-semibold mb-4 text-neutral-900">
               Where I Am Right Now
@@ -269,7 +340,7 @@ const About: React.FC = () => {
               tools. Now I'm looking around for my next opportunity,
               noodling on some things I want to build, and open to
               opportunities where I get to bring both my product and
-              engineering capabilities —the depth in both—to solve hard
+              engineering capabilities—the depth in both—to solve hard
               problems. Hard not just technically, but from a product
               and consumer standpoint as well.
             </p>
