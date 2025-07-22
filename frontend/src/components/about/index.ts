@@ -1,0 +1,10 @@
+export { IntroSection } from "./IntroSection";
+export { EarlyDaysSection } from "./EarlyDaysSection";
+export { YaleSection } from "./YaleSection";
+export { SFJourneySection } from "./SFJourneySection";
+export { TurningPointSection } from "./TurningPointSection";
+export { BuildingSection } from "./BuildingSection";
+export { PhilosophySection } from "./PhilosophySection";
+export { InterestsSection } from "./InterestsSection";
+export { CurrentSection } from "./CurrentSection";
+export { ContactLinks } from "./ContactLinks";
