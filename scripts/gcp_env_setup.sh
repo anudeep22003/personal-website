@@ -1,10 +1,19 @@
 #!/bin/bash
-# Setup script for ReqPal GCP infrastructure
+# Setup script for GCP infrastructure
 
 # Exit on any error
 set -e
 
-echo "Setting up ReqPal GCP infrastructure..."
+# Check if project name is provided
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <project-name>"
+    echo "Example: $0 my-awesome-project"
+    exit 1
+fi
+
+PROJECT_NAME="$1"
+
+echo "Setting up GCP infrastructure for project: $PROJECT_NAME..."
 
 # Check if gcloud CLI is installed
 if ! command -v gcloud &> /dev/null; then
@@ -18,12 +27,12 @@ echo "Please authenticate with Google Cloud..."
 gcloud auth login
 
 # Create project
-echo "Creating project reqpal..."
-gcloud projects create reqpal --name="ReqPal" || echo "Project may already exist, continuing..."
+echo "Creating project $PROJECT_NAME..."
+gcloud projects create "$PROJECT_NAME" --name="$PROJECT_NAME" || echo "Project may already exist, continuing..."
 
 # Set current project
-echo "Setting reqpal as the current project..."
-gcloud config set project reqpal
+echo "Setting as the current project..."
+gcloud config set project "$PROJECT_NAME"
 
 # Check and prompt for billing account
 echo "Checking for billing accounts..."
@@ -47,7 +56,7 @@ read BILLING_ACCOUNT_ID
 
 # Link billing account to project
 echo "Linking billing account to project..."
-gcloud billing projects link reqpal --billing-account="$BILLING_ACCOUNT_ID"
+gcloud billing projects link "$PROJECT_NAME" --billing-account="$BILLING_ACCOUNT_ID"
 
 # Enable required APIs
 echo "Enabling required APIs..."
@@ -58,11 +67,11 @@ gcloud services enable artifactregistry.googleapis.com
 
 # Create storage bucket
 echo "Creating storage bucket..."
-gsutil mb -l us-central1 gs://reqpal-storage || echo "Bucket may already exist, continuing..."
+gsutil mb -l us-central1 "gs://${PROJECT_NAME}-storage" || echo "Bucket may already exist, continuing..."
 
 # Set bucket permissions (modify as needed)
 echo "Setting bucket permissions..."
-gsutil iam ch allUsers:objectViewer gs://reqpal-storage
+gsutil iam ch allUsers:objectViewer "gs://${PROJECT_NAME}-storage"
 
 # Create service account for backend
 echo "Creating service account for backend..."
@@ -70,14 +79,14 @@ gcloud iam service-accounts create backend-service || echo "Service account may 
 
 # Grant storage permissions
 echo "Granting storage permissions to backend service..."
-gsutil iam ch serviceAccount:backend-service@reqpal.iam.gserviceaccount.com:objectAdmin gs://reqpal-storage
+gsutil iam ch "serviceAccount:backend-service@${PROJECT_NAME}.iam.gserviceaccount.com:objectAdmin" "gs://${PROJECT_NAME}-storage"
 
 # Create key file for service account
 echo "Creating service account key..."
-gcloud iam service-accounts keys create backend-key.json --iam-account=backend-service@reqpal.iam.gserviceaccount.com
+gcloud iam service-accounts keys create backend-key.json --iam-account="backend-service@${PROJECT_NAME}.iam.gserviceaccount.com"
 
 echo "Setup complete!"
-echo "Your project, storage bucket, and service account have been created."
+echo "Your project '$PROJECT_NAME', storage bucket, and service account have been created."
 echo "Service account key saved to: backend-key.json"
 echo ""
 echo "Next steps:"
