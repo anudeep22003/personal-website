@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router";
-import DOMPurify from "dompurify";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -79,9 +79,9 @@ const BlogPostPage: React.FC = () => {
   }
 
   return (
-    <section className="w-full max-w-2xl mx-auto px-4 m-4">
+    <section className="w-full max-w-4xl mx-auto px-4 m-4">
       <div className="absolute inset-0 bg-gradient-to-br from-neutral-50 via-white to-neutral-100 -z-10 rounded-lg opacity-70" />
-      <div className="relative border border-neutral-200/60 rounded-lg p-6 bg-white/85 backdrop-blur-sm shadow-sm ring-1 ring-neutral-100/80">
+      <div className="relative border border-neutral-200/60 rounded-lg p-8 bg-white/85 backdrop-blur-sm shadow-sm ring-1 ring-neutral-100/80">
         {/* Back link */}
         <div className="mb-6">
           <Link
@@ -94,8 +94,8 @@ const BlogPostPage: React.FC = () => {
         </div>
 
         {/* Post header */}
-        <header className="mb-8 space-y-4">
-          <h1 className="text-2xl font-medium text-neutral-900 leading-tight">
+        <header className="mb-10 space-y-6">
+          <h1 className="text-3xl font-semibold text-neutral-900 leading-tight">
             {post.meta.title}
           </h1>
 
@@ -116,7 +116,7 @@ const BlogPostPage: React.FC = () => {
                 {post.meta.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="inline-block bg-neutral-100 text-neutral-600 px-2 py-1 rounded-full text-xs"
+                    className="inline-block bg-neutral-100 text-neutral-600 px-3 py-1 rounded-full text-xs font-medium"
                   >
                     {tag}
                   </span>
@@ -126,19 +126,19 @@ const BlogPostPage: React.FC = () => {
           </div>
 
           {post.meta.description && (
-            <p className="text-neutral-600 text-base italic border-l-4 border-green-200 pl-4 py-2 bg-green-50/50 rounded-r">
+            <p className="text-neutral-600 text-lg italic border-l-4 border-green-200 pl-6 py-3 bg-green-50/50 rounded-r-lg">
               {post.meta.description}
             </p>
           )}
         </header>
 
-        {/* Post content */}
-        <article
-          className="prose prose-neutral max-w-none prose-headings:text-neutral-900 prose-headings:font-medium prose-headings:lowercase prose-p:text-neutral-700 prose-p:leading-relaxed prose-a:text-green-600 prose-a:underline prose-a:underline-offset-2 hover:prose-a:text-green-700 prose-code:text-neutral-800 prose-code:bg-neutral-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-neutral-900 prose-pre:text-neutral-100 prose-blockquote:border-l-green-200 prose-blockquote:bg-green-50/30 prose-blockquote:text-neutral-700 prose-table:text-sm"
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(post.content),
-          }}
-        />
+        {/* Post content with enhanced markdown rendering */}
+        <article className="max-w-none">
+          <MarkdownRenderer
+            content={post.content}
+            className="space-y-6"
+          />
+        </article>
       </div>
     </section>
   );

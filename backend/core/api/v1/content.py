@@ -38,13 +38,13 @@ def load_post(slug: str) -> BlogPost:
     post = frontmatter.load(filepath)
     meta = BlogMeta(slug=slug, **post.metadata)
 
-    # Convert markdown to HTML
-    html = markdown.markdown(
-        post.content,
-        extensions=["fenced_code", "codehilite", "tables", "toc", "attr_list"],
-    )
+    # # Convert markdown to HTML
+    # html = markdown.markdown(
+    #     post.content,
+    #     extensions=["fenced_code", "codehilite", "tables", "toc", "attr_list"],
+    # )
 
-    return BlogPost(meta=meta, content=html)
+    return BlogPost(meta=meta, content=post.content)
 
 
 @router.get("/posts", response_model=list[BlogMeta])
