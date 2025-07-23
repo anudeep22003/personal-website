@@ -4,6 +4,8 @@ import RootLayout from "./Layout";
 import ResumePage from "./pages/Resume";
 import AboutPage from "./pages/About";
 import ProfessionalHistory from "./pages/ProfessionalHistory";
+import BlogListPage from "./pages/BlogList";
+import BlogPostPage from "./pages/BlogPost";
 
 export const routes = [
   {
@@ -24,6 +26,14 @@ export const routes = [
       {
         path: "/history",
         element: <ProfessionalHistory />,
+      },
+      {
+        path: "/blog",
+        element: <BlogListPage />,
+      },
+      {
+        path: "/blog/:slug",
+        element: <BlogPostPage />,
       },
     ],
   },

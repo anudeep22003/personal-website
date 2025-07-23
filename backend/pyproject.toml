@@ -4,10 +4,20 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = ["fastapi>=0.116.1", "pydantic>=2.11.7"]
+dependencies = [
+    "fastapi>=0.116.1",
+    "markdown>=3.8.2",
+    "pydantic>=2.11.7",
+    "python-frontmatter>=1.1.0",
+    "uvicorn>=0.35.0",
+]
 
 [dependency-groups]
-dev = ["mypy>=1.17.0", "ruff>=0.12.4"]
+dev = [
+    "mypy>=1.17.0",
+    "ruff>=0.12.4",
+    "types-markdown>=3.8.0.20250708",
+]
 
 [tool.mypy]
 python_version = "3.12"

@@ -4,14 +4,16 @@ import { routes } from "./router";
 const RootLayout = () => {
   const pathsUnderLayout = routes[0].children;
 
-  const links = pathsUnderLayout.map((path) => ({
-    label:
-      path.path === "/"
-        ? "home"
-        : path.path.replace("/", "").replace(/-/g, " "),
-    href: path.path,
-    element: path.element,
-  }));
+  const links = pathsUnderLayout
+    .filter((path) => !path.path.includes(":")) // Exclude dynamic routes like /blog/:slug
+    .map((path) => ({
+      label:
+        path.path === "/"
+          ? "home"
+          : path.path.replace("/", "").replace(/-/g, " "),
+      href: path.path,
+      element: path.element,
+    }));
   return (
     <div className="flex flex-col items-center min-h-screen bg-white text-black font-sans">
       <nav className="w-full flex justify-center p-4 mb-0 sticky top-0 z-50 bg-white/10 backdrop-blur border-b border-neutral-200">
