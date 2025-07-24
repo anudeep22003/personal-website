@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -12,13 +12,77 @@ interface MarkdownRendererProps {
   className?: string;
 }
 
+// Mermaid diagram component
+const MermaidDiagram: React.FC<{ chart: string }> = ({ chart }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const renderMermaid = async () => {
+      if (!containerRef.current) return;
+
+      try {
+        // Dynamically import mermaid to avoid SSR issues
+        const mermaid = await import("mermaid");
+
+        // Initialize mermaid
+        mermaid.default.initialize({
+          startOnLoad: false,
+          theme: "default",
+          securityLevel: "loose",
+          fontFamily: "monospace",
+        });
+
+        // Clear previous content
+        containerRef.current.innerHTML = "";
+
+        // Render the diagram
+        const { svg } = await mermaid.default.render(
+          `mermaid-${Math.random().toString(36).substr(2, 9)}`,
+          chart
+        );
+
+        containerRef.current.innerHTML = svg;
+      } catch (error) {
+        console.error("Error rendering Mermaid diagram:", error);
+        containerRef.current.innerHTML = `
+          <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
+            <p class="text-red-700 text-sm">Error rendering diagram</p>
+            <pre class="mt-2 text-xs text-red-600 overflow-auto">${chart}</pre>
+          </div>
+        `;
+      }
+    };
+
+    renderMermaid();
+  }, [chart]);
+
+  return (
+    <div className="my-6 rounded-lg border border-neutral-200/60 overflow-hidden shadow-sm">
+      <div className="bg-neutral-100/50 px-4 py-2 border-b border-neutral-200/40">
+        <span className="text-xs font-medium text-neutral-600 uppercase tracking-wide">
+          Mermaid Diagram
+        </span>
+      </div>
+      <div className="p-4 bg-white">
+        <div ref={containerRef} className="flex justify-center" />
+      </div>
+    </div>
+  );
+};
+
 // Custom components for enhanced markdown rendering
 const components = {
-  // Enhanced code blocks with syntax highlighting
+  // Enhanced code blocks with syntax highlighting and Mermaid support
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   code({ node, inline, className, children, ...props }: any) {
     const match = /language-(\w+)/.exec(className || "");
     const language = match ? match[1] : "";
+
+    if (!inline && language === "mermaid") {
+      return (
+        <MermaidDiagram chart={String(children).replace(/\n$/, "")} />
+      );
+    }
 
     if (!inline && language) {
       return (
