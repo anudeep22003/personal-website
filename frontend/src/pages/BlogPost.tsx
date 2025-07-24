@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
-
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+import { BACKEND_URL } from "@/constants";
 
 interface BlogMeta {
   slug: string;
