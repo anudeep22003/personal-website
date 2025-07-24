@@ -78,7 +78,7 @@ const BlogPostPage: React.FC = () => {
   }
 
   return (
-    <section className="w-full max-w-4xl mx-auto px-4 m-4">
+    <section className="w-full max-w-full sm:max-w-4xl mx-auto px-0 sm:px-4 m-4">
       <div className="absolute inset-0 bg-gradient-to-br from-neutral-50 via-white to-neutral-100 -z-10 rounded-lg opacity-70" />
       <div className="relative border border-neutral-200/60 rounded-lg p-8 bg-white/85 backdrop-blur-sm shadow-sm ring-1 ring-neutral-100/80">
         {/* Back link */}

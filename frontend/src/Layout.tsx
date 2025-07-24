@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { Link, Outlet } from "react-router";
+import { Link, Outlet, useLocation, useNavigate } from "react-router";
 import { routes } from "./router";
 
 const RootLayout = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathsUnderLayout = routes[0].children;
+  const location = useLocation(); // Get current location
+  const navigate = useNavigate(); // For back navigation
 
   const links = pathsUnderLayout
     .filter((path) => !path.path.includes(":"))
@@ -17,12 +19,36 @@ const RootLayout = () => {
       element: path.element,
     }));
 
+  const isHome = location.pathname === "/";
+
   return (
     <div className="flex flex-col items-center min-h-screen bg-white text-black font-sans">
       <nav className="w-full flex justify-center p-4 mb-0 sticky top-0 z-50 bg-white/10 backdrop-blur border-b border-neutral-200">
         {/* Hamburger for mobile */}
         <div className="flex w-full items-center justify-between md:hidden">
-          <span className="font-bold text-lg">Menu</span>
+          <span className="font-bold text-lg">
+            {isHome ? (
+              "home"
+            ) : (
+              <button
+                aria-label="Go back"
+                className="flex items-center px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-green-600/20"
+                onClick={() => navigate(-1)}
+              >
+                {/* Simple left arrow SVG */}
+                <svg
+                  width="24"
+                  height="24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+                <span className="ml-1">back</span>
+              </button>
+            )}
+          </span>
           <button
             aria-label="Open menu"
             className="p-2 focus:outline-none"
