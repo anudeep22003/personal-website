@@ -10,8 +10,6 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
-    env:
-      PROJECT_ID: anudeepy
 
     steps:
       - name: Checkout code
@@ -21,6 +19,7 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           credentials_json: "${{ secrets.GCP_SA_KEY_ANUDEEPY }}"
+          project_id: "anudeepy"
 
       - name: Configure Docker for Artifact Registry
         run: gcloud auth configure-docker us-central1-docker.pkg.dev
@@ -28,8 +27,8 @@ jobs:
       - name: Build Docker image
         working-directory: ./backend
         run: |
-          docker build -t us-central1-docker.pkg.dev/$PROJECT_ID/my-docker-repo/my-image:latest .
+          docker build -t us-central1-docker.pkg.dev/anudeepy/my-docker-repo/my-image:latest .
 
       - name: Push Docker image
         run: |
-          docker push us-central1-docker.pkg.dev/$PROJECT_ID/my-docker-repo/my-image:latest
+          docker push us-central1-docker.pkg.dev/anudeepy/my-docker-repo/my-image:latest

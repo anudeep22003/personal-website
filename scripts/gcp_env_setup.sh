@@ -85,6 +85,20 @@ gsutil iam ch "serviceAccount:backend-service@${PROJECT_NAME}.iam.gserviceaccoun
 echo "Creating service account key..."
 gcloud iam service-accounts keys create backend-key.json --iam-account="backend-service@${PROJECT_NAME}.iam.gserviceaccount.com"
 
+# Create Artifact Registry repository
+echo "Creating Artifact Registry repository..."
+gcloud artifacts repositories create my-docker-repo \
+    --repository-format=docker \
+    --location=us-central1 \
+    --description="Docker repository for $PROJECT_NAME" || echo "Repository may already exist, continuing..."
+
+# Grant Artifact Registry permissions to backend service account
+echo "Granting Artifact Registry permissions to backend service account..."
+gcloud artifacts repositories add-iam-policy-binding my-docker-repo \
+    --location=us-central1 \
+    --member="serviceAccount:backend-service@${PROJECT_NAME}.iam.gserviceaccount.com" \
+    --role="roles/artifactregistry.writer"
+
 echo "Setup complete!"
 echo "Your project '$PROJECT_NAME', storage bucket, and service account have been created."
 echo "Service account key saved to: backend-key.json"
