@@ -96,7 +96,7 @@ const BlogListPage: React.FC = () => {
 
                 {post.tags.length > 0 && (
                   <div className="flex flex-wrap gap-1 mb-2">
-                    {post.tags.slice(0, 3).map((tag) => (
+                    {post.tags.map((tag) => (
                       <span
                         key={tag}
                         className="inline-block bg-neutral-100 text-neutral-600 px-2 py-0.5 rounded text-xs"
@@ -104,11 +104,6 @@ const BlogListPage: React.FC = () => {
                         {tag}
                       </span>
                     ))}
-                    {post.tags.length > 3 && (
-                      <span className="text-xs text-neutral-400">
-                        +{post.tags.length - 3} more
-                      </span>
-                    )}
                   </div>
                 )}
 
