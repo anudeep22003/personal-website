@@ -26,7 +26,9 @@ const BlogListPage: React.FC = () => {
         const data = await response.json();
         setPosts(data);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to fetch posts");
+        setError(
+          err instanceof Error ? err.message : "Failed to fetch posts"
+        );
       } finally {
         setLoading(false);
       }
@@ -53,73 +55,72 @@ const BlogListPage: React.FC = () => {
 
   return (
     <section className="w-full max-w-2xl mx-auto px-4 m-4">
-      <div className="absolute inset-0 bg-gradient-to-br from-neutral-50 via-white to-neutral-100 -z-10 rounded-lg opacity-70" />
-      <div className="relative border border-neutral-200/60 rounded-lg p-6 bg-white/85 backdrop-blur-sm shadow-sm ring-1 ring-neutral-100/80">
-        <header className="mb-8">
-          <h1 className="text-2xl font-normal lowercase tracking-tight text-neutral-900 mb-2">
-            blog
-          </h1>
-          <p className="text-base text-neutral-600">
-            thoughts on ai, systems, and human potential
-          </p>
-        </header>
+      <header className="mb-6">
+        <h1 className="text-2xl font-normal lowercase tracking-tight text-neutral-900 mb-1">
+          blog
+        </h1>
+        <p className="text-sm text-neutral-600">
+          thoughts on ai, systems, and human potential
+        </p>
+      </header>
 
-        <div className="space-y-6">
-          {posts.length === 0 ? (
-            <div className="text-center text-neutral-600">
-              No blog posts found.
-            </div>
-          ) : (
-            posts.map((post) => (
-              <article
-                key={post.slug}
-                className="border-b border-neutral-100 pb-6 last:border-b-0"
-              >
-                <Link
-                  to={`/blog/${post.slug}`}
-                  className="group block hover:bg-neutral-50/50 rounded-lg p-4 -m-4 transition-colors"
-                >
-                  <h2 className="text-lg font-medium text-neutral-900 group-hover:text-green-600 transition-colors mb-2">
+      <div className="space-y-4">
+        {posts.length === 0 ? (
+          <div className="text-center text-neutral-600 text-sm">
+            No blog posts found.
+          </div>
+        ) : (
+          posts.map((post) => (
+            <article
+              key={post.slug}
+              className="group hover:bg-neutral-50/30 rounded-lg p-3 transition-colors border border-transparent hover:border-neutral-200"
+            >
+              <Link to={`/blog/${post.slug}`} className="block">
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  <h2 className="text-base font-medium text-neutral-900 group-hover:text-green-600 transition-colors flex-1">
                     {post.title}
                   </h2>
-                  
-                  <div className="flex items-center gap-4 mb-3 text-sm text-neutral-500">
-                    <time dateTime={post.publish_date}>
-                      {new Date(post.publish_date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
+                  <time
+                    dateTime={post.publish_date}
+                    className="text-xs text-neutral-400 whitespace-nowrap flex-shrink-0"
+                  >
+                    {new Date(post.publish_date).toLocaleDateString(
+                      "en-US",
+                      {
+                        month: "short",
                         day: "numeric",
-                      })}
-                    </time>
-                    {post.tags.length > 0 && (
-                      <div className="flex flex-wrap gap-2">
-                        {post.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="inline-block bg-neutral-100 text-neutral-600 px-2 py-1 rounded-full text-xs"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
+                      }
+                    )}
+                  </time>
+                </div>
+
+                {post.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1 mb-2">
+                    {post.tags.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        className="inline-block bg-neutral-100 text-neutral-600 px-2 py-0.5 rounded text-xs"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                    {post.tags.length > 3 && (
+                      <span className="text-xs text-neutral-400">
+                        +{post.tags.length - 3} more
+                      </span>
                     )}
                   </div>
-                  
-                  {post.description && (
-                    <p className="text-neutral-600 text-sm leading-relaxed">
-                      {post.description}
-                    </p>
-                  )}
-                  
-                  <div className="flex items-center gap-2 mt-3 text-sm text-green-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span>read more</span>
-                    <span>→</span>
-                  </div>
-                </Link>
-              </article>
-            ))
-          )}
-        </div>
+                )}
+
+                {post.description && (
+                  <p className="text-neutral-600 text-sm leading-relaxed">
+                    {post.description}
+                  </p>
+                )}
+              </Link>
+            </article>
+          ))
+        )}
       </div>
     </section>
   );
