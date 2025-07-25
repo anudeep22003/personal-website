@@ -70,10 +70,12 @@ const BlogListPage: React.FC = () => {
             No blog posts found.
           </div>
         ) : (
-          posts.map((post) => (
+          posts.map((post, index) => (
             <article
               key={post.slug}
-              className="group hover:bg-neutral-50/30 rounded-lg p-3 transition-colors border border-transparent hover:border-neutral-200"
+              className={`group hover:bg-neutral-50/30 rounded-lg p-3 transition-colors border border-transparent hover:border-neutral-200 ${
+                index % 2 === 0 ? "bg-white" : "bg-green-500/10"
+              }`}
             >
               <Link to={`/blog/${post.slug}`} className="block">
                 <div className="flex items-start justify-between gap-3 mb-2">
