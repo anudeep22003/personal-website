@@ -122,7 +122,7 @@ const Homepage: React.FC = () => {
 
         <div className="text-base leading-relaxed text-neutral-600 space-y-6">
           {/* Who am I */}
-          <div>
+          <div className="gap-2 flex flex-col">
             <h2 className="text-lg font-semibold text-neutral-900 mb-1 lowercase">
               who am i
             </h2>
@@ -187,7 +187,7 @@ const Homepage: React.FC = () => {
           </div>
 
           {/* What interests me */}
-          <div>
+          <div className="gap-2 flex flex-col">
             <h2 className="text-lg font-semibold text-neutral-900 mb-1 lowercase">
               what interests me
             </h2>
@@ -215,7 +215,7 @@ const Homepage: React.FC = () => {
           </div>
 
           {/* Cool things I've done */}
-          <div>
+          <div className="gap-2 flex flex-col">
             <h2 className="text-lg font-semibold text-neutral-900 mb-1 lowercase">
               cool things i've done
             </h2>
