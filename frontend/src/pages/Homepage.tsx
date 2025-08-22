@@ -229,13 +229,13 @@ const Homepage: React.FC = () => {
                     <span className="font-medium text-green-600">
                       Won India's first AI Hackathon
                     </span>{" "}
-                    with Youtalk, a Chrome plugin that lets you
-                    interrogate YouTube videos using AI. Built in 24
-                    hours, it enables discoverability for long-form
-                    content creators.
+                    with a video query system that lets you interrogate
+                    any video content using AI. Built in 24 hours, it
+                    enables intelligent search and discovery in dense
+                    videos.
                   </p>
                   <a
-                    href="https://restofworld.org/2023/india-generative-ai-hackathon-2023-projects/#/multimode-turn-text-into"
+                    href="https://restofworld.org/2023/india-generative-ai-hackathon-2023-projects/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xs text-neutral-600 hover:text-green-600 underline underline-offset-2 transition-colors"
