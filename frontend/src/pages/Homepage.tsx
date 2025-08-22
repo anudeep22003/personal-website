@@ -79,6 +79,47 @@ const Homepage: React.FC = () => {
           </div>
         </header>
 
+        {/* Social links and resume */}
+        <div className="flex flex-col gap-4 mb-6 pb-6 border-b border-neutral-200">
+          <div className="flex flex-col gap-3">
+            <span className="text-neutral-500 text-sm lowercase">
+              find me here
+            </span>
+            <nav className="flex flex-wrap gap-4">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-600 hover:text-green-600 underline underline-offset-2 text-sm lowercase transition-colors hover:bg-green-50 px-2 py-1 rounded"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+
+          <div className="flex items-center justify-between pt-2 border-t border-neutral-100">
+            <a
+              href="/resume"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 text-neutral-600 hover:text-green-600 text-sm lowercase transition-colors"
+            >
+              <span className="underline underline-offset-2">
+                see my resume
+              </span>
+              <span className="opacity-0 group-hover:opacity-100 transition-opacity">
+                →
+              </span>
+            </a>
+            <span className="inline-block bg-gradient-to-r from-neutral-200 to-neutral-300 text-neutral-600 px-2 py-1 rounded-full text-xs">
+              pdf
+            </span>
+          </div>
+        </div>
+
         <div className="text-base leading-relaxed text-neutral-600 space-y-6">
           {/* Who am I */}
           <div>
@@ -172,6 +213,64 @@ const Homepage: React.FC = () => {
               .
             </p>
           </div>
+
+          {/* Cool things I've done */}
+          <div>
+            <h2 className="text-lg font-semibold text-neutral-900 mb-1 lowercase">
+              cool things i've done
+            </h2>
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <span className="inline-block bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-medium border border-green-200">
+                  🏆
+                </span>
+                <div>
+                  <p className="text-sm">
+                    <span className="font-medium text-green-600">
+                      Won India's first AI Hackathon
+                    </span>{" "}
+                    with Youtalk, a Chrome plugin that lets you
+                    interrogate YouTube videos using AI. Built in 24
+                    hours, it enables discoverability for long-form
+                    content creators.
+                  </p>
+                  <a
+                    href="https://restofworld.org/2023/india-generative-ai-hackathon-2023-projects/#/multimode-turn-text-into"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-neutral-600 hover:text-green-600 underline underline-offset-2 transition-colors"
+                  >
+                    Read more →
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <span className="inline-block bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs font-medium border border-blue-200">
+                  💊
+                </span>
+                <div>
+                  <p className="text-sm">
+                    <span className="font-medium text-green-600">
+                      Raised funding and launched a healthtech startup
+                    </span>{" "}
+                    in Sierra Leone. TextDirect won a $20K D-Prize grant
+                    for an automated platform that increases malaria
+                    medication adherence through personalized text
+                    reminders.
+                  </p>
+                  <a
+                    href="https://jackson.yale.edu/news/graduate-students-awarded-20k-prize-for-health-care-technology-project/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-neutral-600 hover:text-green-600 underline underline-offset-2 transition-colors"
+                  >
+                    Read more →
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Interests and approach section */}
@@ -192,48 +291,6 @@ const Homepage: React.FC = () => {
             <span className="text-neutral-600">
               code as poetry • functional art • organic systems •
               biology
-            </span>
-          </div>
-        </div>
-
-        {/* Social links */}
-        <div className="flex flex-col gap-3 mt-8 pt-6 border-t border-neutral-200">
-          <span className="text-neutral-500 text-sm lowercase">
-            find me here
-          </span>
-          <nav className="flex flex-wrap gap-4">
-            {socialLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-green-600 hover:text-green-600 underline underline-offset-2 text-sm lowercase transition-colors hover:bg-green-50 px-2 py-1 rounded"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-        </div>
-
-        {/* Resume link */}
-        <div className="mt-8 pt-6 border-t border-neutral-200">
-          <div className="flex items-center justify-between">
-            <a
-              href="/resume"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 text-neutral-600 hover:text-green-600 text-base lowercase transition-colors"
-            >
-              <span className="underline underline-offset-2">
-                see my resume
-              </span>
-              <span className="opacity-0 group-hover:opacity-100 transition-opacity">
-                →
-              </span>
-            </a>
-            <span className="inline-block bg-gradient-to-r from-neutral-200 to-neutral-300 text-neutral-600 px-2 py-1 rounded-full text-xs">
-              pdf
             </span>
           </div>
         </div>
