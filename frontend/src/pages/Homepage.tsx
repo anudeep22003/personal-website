@@ -32,7 +32,7 @@ const Homepage: React.FC = () => {
               <h1 className="text-2xl font-normal lowercase tracking-tight">
                 anudeep yegireddi
               </h1>
-              <div className="h-2 w-2 bg-neutral-400 rounded-full animate-pulse" />
+              <div className="h-2 w-2 bg-green-600 rounded-full animate-pulse" />
             </div>
             <p className="text-base text-neutral-600 lowercase italic">
               engineer, founder, late bloomer
@@ -229,10 +229,10 @@ const Homepage: React.FC = () => {
                     <span className="font-medium text-green-600">
                       Won India's first AI Hackathon
                     </span>{" "}
-                    with a video query system that lets you interrogate
-                    any video content using AI. Built in 24 hours, it
-                    enables intelligent search and discovery in dense
-                    videos.
+                    with a YouTalk, video query system that lets you
+                    interrogate any video content using AI. Built in 24
+                    hours, it enables intelligent search and discovery
+                    in dense videos starting with Youtube.
                   </p>
                   <a
                     href="https://restofworld.org/2023/india-generative-ai-hackathon-2023-projects/"
